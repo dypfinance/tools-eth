@@ -700,7 +700,7 @@ a:hover {
   position: fixed;
   top: 0;
   left: 0;
-  width: 18%;
+  width: 17%;
   height: 100vh;
   padding: 110px 0 60px;
   overflow-y: auto;
@@ -714,7 +714,7 @@ a:hover {
 }
 
 .page_wrapper.minimize .sidebar {
-  width: 7%;
+  width: 6%;
 }
 
 .theme-dark .logo img.logo-white,
@@ -819,7 +819,7 @@ a:hover {
 .minimize-wrap {
   position: fixed;
   top: 60%;
-  left: 18%;
+  left: 17%;
   z-index: 999;
   transform: translateY(-50%);
   height: 100vh;
@@ -830,7 +830,7 @@ a:hover {
 }
 
 .page_wrapper.minimize .minimize-wrap {
-  left: 7%;
+  left: 6%;
 }
 
 .page_wrapper.minimize .header-left {
@@ -916,14 +916,14 @@ a:hover {
 
 .right-content {
   width: 81.5%;
-  margin-left: 19.5%;
+  margin-left: 18%;
   /* transition: 0.3s; */
   padding: 100px 20px 0 0;
 }
 
 .page_wrapper.minimize .right-content {
   width: 93%;
-  margin-left: 9%;
+  margin-left: 7%;
 }
 
 .graph-wrap {
@@ -1279,10 +1279,186 @@ body.theme-dark img.graph-two {
 }
 
 .news-title {
-    font-weight: 700;
-font-size: 32px;
-line-height: 39px;
-color: #000000;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  color: #000000;
+}
+
+.brand-wrapper {
+  position: relative;
+}
+
+.banner-wrapper {
+  margin-top: 0;
+  margin-bottom: 60px;
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: linear-gradient(180deg, #fa4933 0%, #e30713 100%) !important;
+  box-shadow: 0px 4px 4px rgba(227, 7, 19, 0.3) !important;
+  width: 15px;
+  height: 15px;
+}
+
+.news-bottom-wrapper {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.like-indicator {
+  height: 15px;
+  cursor: pointer;
+}
+
+#dislike {
+  margin-left: 5px;
+  transform: rotate(180deg);
+}
+
+.date-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.date-content {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: #999999 !important;
+  margin: 0;
+}
+
+.banner-item {
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  margin: 0 10px;
+}
+
+.like-wrapper {
+  display: flex;
+  gap: 3px;
+}
+
+.main-title-text {
+  padding-bottom: 30px;
+  padding-top: 20px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: 0.05em;
+}
+
+.main-image {
+  /* box-shadow: inset 0px 0px 30px 30px rgb(0 0 0 / 90%) */
+}
+
+.tags {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 10px;
+  color: #ffffff;
+  background: linear-gradient(86.84deg, #e30613 2.69%, #fc4f36 97.76%);
+  border-radius: 4px;
+  padding: 10px 20px;
+  width: fit-content;
+}
+
+.tag-wrapper {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 10.59%,
+    rgba(0, 0, 0, 0.16) 35.78%,
+    #000000 100%
+  );
+  opacity: 0.8;
+  border-radius: 0px 0px 8px 8px;
+  height: 118px;
+  position: relative;
+  bottom: 115px;
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.singlenews-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  max-width: 300px;
+}
+
+.singlenews-image {
+  width: 170px;
+  height: 110px;
+}
+
+.singlenews-title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #3a3a3a;
+}
+
+.singlenews-body {
+  margin: auto;
+  width: 543px;
+}
+
+.singlenews-side {
+  width: 40%;
+  height: 500px;
+  overflow: auto;
+  border-left: 1px solid #d9d9d9;
+}
+
+.button-wrapper {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 5px;
+  display: flex;
+  border: 1px solid #e30613;
+  max-width: 533px;
+  margin: auto;
+  justify-content: space-evenly;
+}
+
+.passivebutton {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #929292;
+  background: white;
+  cursor: pointer;
+  display: flex;
+justify-content: center;
+align-items: center;
+width: 262px;
+height: 34px;
+}
+
+.activebutton {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: white;
+  width: 262px;
+height: 34px;
+display: flex;
+justify-content: center;
+align-items: center;
+  background: white;
+  cursor: pointer;
+  background: linear-gradient(51.32deg, #E30613 -12.3%, #FA4A33 50.14%);
+  border-radius: 6px;
 }
 
 /*---------------------------------

@@ -1,9 +1,71 @@
-import React from 'react'
+import React, { useState } from "react";
+import VotePassive from "./assets/votepassive.svg";
+import Upvote from "./assets/upvote.svg";
+import Downvote from "./assets/downvote.svg";
+import Dots from "./assets/dots.svg";
+import Clock from "./assets/clock.svg";
 
-const SingleNews = ()=>{
-    return <div>
-        <div></div>
+const SingleNews = ({ title, image, link, month, day, year }) => {
+  const [likeIndicator, setLikeIndicator] = useState("none");
+
+
+  return (
+    <div className="singlenews-body">
+      <a href={link} target={"_blank"}>
+        <div className="row m-0 justify-content-between" style={{ gap: 20 }}>
+          <div className="singlenews-wrapper">
+            <h4 className="singlenews-title">{title}</h4>
+            <div className="news-bottom-wrapper">
+              <div className="like-wrapper">
+                <img
+                  src={
+                    likeIndicator === "none"
+                      ? VotePassive
+                      : likeIndicator === "like"
+                      ? Upvote
+                      : Downvote
+                  }
+                  alt=""
+                  className="like-indicator"
+                  onClick={(e) => {
+                    setLikeIndicator("like");
+                    e.stopPropagation()
+                  }}
+                />
+                <img
+                  src={
+                    likeIndicator === "none"
+                      ? VotePassive
+                      : likeIndicator === "like"
+                      ? Upvote
+                      : Downvote
+                  }
+                  alt=""
+                  className="like-indicator"
+                  id="dislike"
+                  onClick={(e) => {
+                    setLikeIndicator("dislike");
+                    e.stopPropagation()
+
+                  }}
+                />
+              </div>
+              <img src={Dots} alt="" style={{ width: "auto" }} />
+              <div className="date-wrapper">
+                <img src={Clock} alt="" style={{ width: "auto" }} />
+                <h6 className="date-content">
+                  {month} {day}, {year}
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div>
+            <img src={image} alt="" className="singlenews-image" />
+          </div>
+        </div>
+      </a>
     </div>
-}
+  );
+};
 
-export default SingleNews
+export default SingleNews;
