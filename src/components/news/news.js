@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SingleNews from "./singleNews";
 import MainNews from "./mainNews";
 import OwlCarousel from "react-owl-carousel";
@@ -47,19 +47,19 @@ const News = () => {
       title: "New smart contract for DYP staking!",
       link: "https://twitter.com/dypfinance/status/1524075021379022848",
       imageSrc:
-        "https://pbs.twimg.com/media/FSaZJ_mXIAAlf_J?format=jpg&name=medium",
+        "https://pbs.twimg.com/media/FSKsEt2XMAA-ZUX?format=jpg&name=medium",
       year: "2022",
     },
-    {
-      date: "7",
-      month: "May",
-      title: "CAWS staking pool is open for business!",
-      link: "https://twitter.com/dypfinance/status/1522968871812141057",
-      imageSrc:
-        "https://pbs.twimg.com/media/FSaZJ_mXIAAlf_J?format=jpg&name=medium",
+    // {
+    //   date: "7",
+    //   month: "May",
+    //   title: "CAWS staking pool is open for business!",
+    //   link: "https://twitter.com/dypfinance/status/1522968871812141057",
+    //   imageSrc:
+    //     "https://pbs.twimg.com/media/FSaZJ_mXIAAlf_J?format=jpg&name=medium",
 
-      year: "2022",
-    },
+    //   year: "2022",
+    // },
     {
       date: "14",
       month: "Apr",
@@ -86,7 +86,7 @@ const News = () => {
       title: "V.R. is the next step for #DYP.",
       link: "https://twitter.com/dypfinance/status/1496072467814756353",
       imageSrc:
-        "https://pbs.twimg.com/media/FNA4t82WUAUfX9z?format=jpg&name=medium",
+        "https://pbs.twimg.com/media/FMMd6vBXoAMb_je?format=jpg&name=4096x4096",
 
       year: "2022",
     },
@@ -281,7 +281,7 @@ const News = () => {
     center: false,
     nav: false,
     dots: true,
-    autoplay: true,
+    autoplay: false,
     rewind: true,
     autoplayTimeout: 5000,
     responsiveClass: true,
@@ -310,7 +310,21 @@ const News = () => {
 
   const carousel = React.createRef();
   const [activeClass, setActiveClass] = useState("latestnews");
+  const [activeNews, setActiveNews] = useState(newsArray[0]);
 
+  useEffect(()=>{
+    setActiveNews(newsArray[0])
+  })
+
+  useEffect((id)=>{
+    handleNewsClick(id)
+  },[activeNews])
+
+
+  const handleNewsClick =(id)=>{
+    setActiveNews(newsArray[id])
+    
+  }
   return (
     <div className="news-wrapper">
       <h1 className="news-title">Popular News</h1>
@@ -329,12 +343,23 @@ const News = () => {
                 return (
                   <div className="banner-item" key={key}>
                     <MainNews
-                      image={item.imageSrc}
-                      title={item.title}
-                      link={item.link}
-                      year={item.year}
-                      month={item.month}
-                      day={item.date}
+                      image={ activeNews?.imageSrc
+                      }
+                      title={
+                        activeNews?.title
+                      }
+                      link={
+                        activeNews?.link
+                      }
+                      year={
+                         activeNews?.year
+                      }
+                      month={
+                      activeNews?.month
+                      }
+                      day={
+                        activeNews?.date
+                      }
                     />
                   </div>
                 );
@@ -376,6 +401,7 @@ const News = () => {
                     year={item.year}
                     month={item.month}
                     day={item.date}
+                    onNewsClick={(e) => {handleNewsClick(key); e.stopPropagation()}}
                   />
                 </div>
               );
