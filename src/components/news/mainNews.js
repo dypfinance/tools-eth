@@ -13,16 +13,15 @@ const MainNews = ({ link, image, title, month, day, year }) => {
       <div className="banner-item">
         <a target="_blank" href={link}>
           <div className="main-image">
-            <img src={image} alt="Image not found" />
+            <img src={image} alt="Image not found" className="news-image"/>
             <div className="tag-wrapper d-none">
               <div className="d-flex" style={{ gap: 10 }}>
                 <h5 className="tags">NFT's</h5>
-
                 <h5 className="tags">CAWS</h5>
               </div>
             </div>
           </div>
-          <h1 className="main-title-text">{title}</h1>
+          <h2 className="main-title-text">{title}</h2>
         </a>
         <div className="news-bottom-wrapper">
           <div className="like-wrapper">
