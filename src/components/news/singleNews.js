@@ -4,8 +4,9 @@ import Upvote from "./assets/upvote.svg";
 import Downvote from "./assets/downvote.svg";
 import Dots from "./assets/dots.svg";
 import Clock from "./assets/clock.svg";
+import WhiteDots from "./assets/dots-white.svg";
 
-const SingleNews = ({ title, image, link, month, day, year, onNewsClick }) => {
+const SingleNews = ({ title, image, link, month, day, year, onNewsClick, theme }) => {
   const [likeIndicator, setLikeIndicator] = useState("none");
 
   return (
@@ -49,7 +50,7 @@ const SingleNews = ({ title, image, link, month, day, year, onNewsClick }) => {
                 }}
               />
             </div>
-            <img src={Dots} alt="" style={{ width: "auto" }} />
+            <img src={ theme === 'theme-dark' ? WhiteDots : Dots} alt="" style={{ width: "auto" }} />
             <div className="date-wrapper">
               <img src={Clock} alt="" style={{ width: "auto" }} />
               <h6 className="date-content">

@@ -4,16 +4,17 @@ import Upvote from "./assets/upvote.svg";
 import Downvote from "./assets/downvote.svg";
 import Dots from "./assets/dots.svg";
 import Clock from "./assets/clock.svg";
+import WhiteDots from "./assets/dots-white.svg";
 
-const MainNews = ({ link, image, title, month, day, year }) => {
+const MainNews = ({ link, image, title, month, day, year, theme, onShowModalClick }) => {
   const [likeIndicator, setLikeIndicator] = useState("none");
-
+  
   return (
     <div className="main-news-image">
       <div className="banner-item">
         <a target="_blank" href={link}>
           <div className="main-image">
-            <img src={image} alt="Image not found" className="news-image"/>
+            <img src={image} alt="Image not found" className="news-image" onClick={(e)=>{e.preventDefault();onShowModalClick()}}/>
             <div className="tag-wrapper d-none">
               <div className="d-flex" style={{ gap: 10 }}>
                 <h5 className="tags">NFT's</h5>
@@ -55,7 +56,7 @@ const MainNews = ({ link, image, title, month, day, year }) => {
               }}
             />
           </div>
-          <img src={Dots} alt="" style={{ width: "auto" }} />
+          <img src={ theme !== 'theme-dark' ? WhiteDots : Dots} alt="" style={{ width: "auto" }} />
           <div className="date-wrapper">
             <img src={Clock} alt="" style={{ width: "auto" }} />
             <h6 className="date-content">

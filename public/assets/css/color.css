@@ -37,7 +37,8 @@ body.theme-dark p,
 body.theme-dark a,
 body.theme-dark span,
 body.theme-dark .header-left a,
-body.theme-dark .header-left span {
+body.theme-dark .header-left span,
+body.theme-dark .news-title {
     color: var(--white) !important;
 }
 
@@ -50,7 +51,10 @@ body.theme-dark .header-wrap,
 body.theme-dark .sidebar,
 body.theme-dark .graph-wrap,
 body.theme-dark .content-footer,
-body.theme-dark .table-title {
+body.theme-dark .table-title,
+body.theme-dark .news-wrapper,
+body.theme-dark .banner-item,
+body.theme-dark .other-news-singlewrapper {
     background-color: var(--black);
 }
 

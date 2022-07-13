@@ -1291,7 +1291,7 @@ body.theme-dark img.graph-two {
 
 .banner-wrapper {
   margin-top: 0;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 }
 
 .owl-theme .owl-dots .owl-dot.active span,
@@ -1381,7 +1381,7 @@ body.theme-dark img.graph-two {
 }
 
 .main-title-text {
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   padding-top: 20px;
   font-weight: 600;
   font-size: 24px;
@@ -1389,8 +1389,34 @@ body.theme-dark img.graph-two {
   letter-spacing: 0.05em;
 }
 
-.main-image {
-  /* box-shadow: inset 0px 0px 30px 30px rgb(0 0 0 / 90%) */
+.close-btn {
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
+}
+
+.close-icon {
+  position: relative;
+  top: 1rem;
+}
+
+.details-modal-content {
+  padding: 2rem;
+  padding-top: 0;
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 1000px;
+    margin: 1.75rem auto;
+    height: 900px;
+    overflow-y: scroll;
+    /* height: auto; */
+    pointer-events: auto;
+  }
 }
 
 .tags {
@@ -1402,6 +1428,11 @@ body.theme-dark img.graph-two {
   border-radius: 4px;
   padding: 10px 20px;
   width: fit-content;
+}
+
+.left-col {
+  display: flex;
+  flex-direction: column;
 }
 
 .tag-wrapper {
@@ -1537,7 +1568,6 @@ body.theme-dark img.graph-two {
   width: 117px;
   border: none !important;
   margin-top: 20px;
-
 }
 
 /*---------------------------------
