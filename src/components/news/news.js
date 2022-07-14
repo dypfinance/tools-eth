@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import SingleNews from "./singleNews";
 import MainNews from "./mainNews";
 import PressRealease from "./PressRelease";
@@ -93,56 +93,278 @@ const News = ({ theme }) => {
         content:
           '🔥 That special moment is finally here! <br/><br> 🧐 Check out our new website. An upgraded UI version with new cool features 👉 an easier and more interactive way to stay connected to our platform! <br/><br/>This is DeFi Yield Protocol! ⤵️ <br/><br/><a href="https://dyp.finance/" target="_blank">dyp.finance</a>',
       },
-    },
-    {
-      date: "10",
-      month: "May",
-      title: "New smart contract for DYP staking!",
-      link: "https://twitter.com/dypfinance/status/1524075021379022848",
-      imageSrc:
-        "https://pbs.twimg.com/media/FSKsEt2XMAA-ZUX?format=jpg&name=medium",
-      year: "2022",
-      content: {
-        imageSrc:
-          "https://pbs.twimg.com/media/FSKsEt2XMAA-ZUX?format=jpg&name=medium",
-        title: "New smart contract for DYP staking!",
-        content:
-          'The game has changed! ⤵️ <br/><br> 💰 Stake your #DYP and earn 25% APR in #ETH, #AVAX or #BNB. <br/><br/>This new smart contract is available on all blockchains: ETH, BSC & C-CHAIN 👉🏽 no impermanent loss. <br/><br/>It all starts today! ⚡️<br/><br/>🔛<a href="https://dyp.finance/stakev2" target="_blank">dyp.finance/stakev2</a>',
-      },
-    },
-    {
-      date: "14",
-      month: "Apr",
-      title: "Gate.io support for DYP on BNB Chain and C-CHAIN!",
-      link: "https://twitter.com/dypfinance/status/1514627082025852936",
-      imageSrc:
-        "https://pbs.twimg.com/media/FQUJHzJXEA0kQ7h?format=jpg&name=medium",
+    }
+  ];
 
-      year: "2022",
-      content: {
-        imageSrc:
-          "https://pbs.twimg.com/media/FQUJHzJXEA0kQ7h?format=jpg&name=medium",
-        title: "Gate.io support for DYP on BNB Chain and C-CHAIN!",
-        content:
-          "Now check this out! 🔊 <br/><br> Starting from today you can trade $DYP on http://Gate.io also on #BSC/BEP20 and #AVAX/C-CHAIN - no bridge required. 💥 <br/><br/>And this is only the beginning! 🚀",
-      },
+  const press_highlight = [
+    {
+      title: "Yield farming platform announces it’s expanding to Avalanche",
+      link: "https://cointelegraph.com/news/yield-farming-platform-announces-it-s-expanding-to-avalanche",
+      date: "JUL 08, 2021",
+      imageSrc:
+        "https://images.cointelegraph.com/images/717_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjEtMDcvMDczNDU5ZWMtYjUwYi00MmRjLWJjNWMtZmJkZDc3NDdlZjg0LmpwZWc=.jpg",
     },
     {
-      date: "4",
-      month: "Mar",
-      title: "March - DYP Vault is ready for action!",
-      link: "https://twitter.com/dypfinance/status/1499761913001136136",
+      title: "DeFi Yield Protocol (DYP) Continues to Expand Its Ecosystem",
+      link: "https://news.bitcoin.com/defi-yield-protocol-dyp-continues-to-expand-its-ecosystem/",
+      date: "Jun 28, 2021",
       imageSrc:
-        "https://pbs.twimg.com/media/FNA4t82WUAUfX9z?format=jpg&name=medium",
+        "https://static.news.bitcoin.com/wp-content/uploads/2021/06/dyp.jpg",
+    },
+    {
+      title:
+        "DYP Protocol Staking dApp Launches on Binance Smart Chain (BSC), LPs to earn Passive Income in ETH, DYP, or BNB",
+      link: "https://crypto.news/dyp-protocol-staking-dapp-binance-smart-chain-bsc-lp-passive-income-eth-dyp-bnb/",
+      date: "April 7, 2021",
+      imageSrc:
+        "https://crypto.news/app/uploads/2021/04/DeFi-Yield-Protocol-Community-Update%E2%80%8A%E2%80%94%E2%80%8AStaking-Pools-Tutorial-on-Binance-Smart-Chain.jpg",
+    },
+    {
+      title: "DeFi Yield Protocol Takes Yield Farming to the Next Level",
+      link: "https://www.newsbtc.com/press-releases/defi-yield-protocol-takes-yield-farming-to-the-next-level/",
+      date: "July 12, 2020",
+      imageSrc:
+        "https://www.newsbtc.com/wp-content/uploads/2020/10/dyp-img.png",
+    },
+    {
+      title:
+        "DeFi Yield Protocol Could Be a Massive Boost for Yield Farmers and the DeFi Space",
+      link: "https://www.cryptocompare.com/coins/guides/defi-yield-protocol-could-be-a-massive-boost-for-yield-farmers-and-the-defi-space/",
+      date: "13 Nov, 2020",
+      imageSrc: "https://www.cryptocompare.com/media/37459245/graph.jpg",
+    },
+    {
+      title:
+        "DeFi Yield Protocol (DYP) Eliminates the Risks of Whale Interference",
+      link: "https://coindoo.com/defi-yield-protocol-dyp-eliminates-the-risks-of-whale-interference/",
+      date: "Aug 6, 2021",
+      imageSrc:
+        "https://coindoo.com/wp-content/uploads/2020/11/DeFi-Yield-Protocol-DYP.jpg",
+    },
+    {
+      title:
+        "DeFi Yield Protocol: The First Manipulation Free DeFi platform in BSC and ETH",
+      link: "https://techbullion.com/defi-yield-protocol-the-first-manipulation-free-defi-platform-in-bsc-and-eth/",
+      date: " Apr 10, 2021",
+      imageSrc:
+        "https://techbullion.com/wp-content/uploads/2021/04/DYP-cast-your-vote-1.jpg",
+    },
+    {
+      title: "DYP.Finance: A Unique Yield Farming Platform",
+      link: "https://www.newsbtc.com/news/company/dyp-finance-a-unique-yield-farming-platform/",
+      date: " Apr 10, 2020",
+      imageSrc: "https://www.newsbtc.com/wp-content/uploads/2020/11/5.jpg",
+    },
+    {
+      title: "DYP.Finance: A Unique Yield Farming Platform",
+      link: "https://www.cryptocompare.com/coins/guides/dypfinance-a-unique-yield-farming-platform/",
+      date: "Nov 16, 2020",
+      imageSrc: "https://www.cryptocompare.com/media/37459277/img_0834.jpg",
+    },
+    {
+      title:
+        "DeFi Yield Protocol (DYP) Launches Staking Pools on Binance Smart Chain",
+      link: "https://u.today/defi-yield-protocol-dyp-launches-staking-pools-on-binance-smart-chain?amp",
+      date: "Apr 12, 2021",
+      imageSrc:
+        "https://u.today/sites/default/files/styles/736x/public/2021-04/7180.jpg",
+    },
+    {
+      title: "DYP Launches Staking DApp on Binance Smart Chain (BSC)n",
+      link: "https://blockonomi.com/dyp-staking-app-binance-smart-chain/",
+      date: "Apr 15, 2021",
+      imageSrc:
+        "https://blockonomi-9fcd.kxcdn.com/wp-content/uploads/2021/02/defi-yield-770x515.jpg",
+    },
+    {
+      title:
+        "DeFi Yield Protocol (DYP) Witnesses Massive Growth Following Binance Smart Chain Integration",
+      link: "https://news.bitcoin.com/defi-yield-protocol-dyp-witnesses-massive-growth-following-binance-smart-chain-integration/",
+      date: "Apr 9, 2021",
+      imageSrc:
+        "https://static.news.bitcoin.com/wp-content/uploads/2021/04/RuCUQmM6-dyp-7-prill-1-1280x720.jpg",
+    },
+    {
+      title: "DeFi Yield Protocol (DYP): All in One Platform Yielding Benefits",
+      link: "https://cryptopotato.com/defi-yield-protocol-dyp-all-in-one-platform-yielding-benefits/",
+      date: "Nov 30, 2020",
+      imageSrc:
+        "https://cryptopotato.com/wp-content/uploads/2020/11/defiyieldprotocol_cover.jpg",
+    },
+    {
+      title: "DYP Launches Staking DApp on Binance Smart Chain (BSC)",
+      link: "https://techbullion.com/dyp-launches-staking-dapp-on-binance-smart-chain-bsc/",
+      date: "Apr 19, 2021",
+      imageSrc:
+        "https://techbullion.com/wp-content/uploads/2021/04/DYP-Launches-Staking-DApp-DYPFinance.jpg",
+    },
+    {
+      title:
+        "Earn compound yields on Binance Smart Chain using DeFi Yield Protocol (DYP)",
+      link: "https://coincodex.com/article/11092/earn-compound-yields-on-binance-smart-chain-using-defi-yield-protocol-dyp/",
+      date: "Apr 21, 2021",
+      imageSrc:
+        "https://coincodex.com/en/resources/images//admin/news/earn-compound-yields/image1.jpg:resizeboxcropjpg?1050x590",
+    },
+    {
+      title: "DYP.Finance – Stake DeFi Tokens and Get Paid in ETH",
+      link: "https://techbullion.com/dyp-finance-stake-defi-tokens-and-get-paid-in-eth/",
+      date: "Dec 19, 2020",
+      imageSrc:
+        "https://techbullion.com/wp-content/uploads/2020/12/Defi-Yield-Protocol.jpg",
+    },
+    {
+      title: "DeFi Yield Protocol (DYP) Staking and Governance is Now Live",
+      link: "https://medium.com/the-capital/defi-yield-protocol-dyp-staking-and-governance-is-now-live-e18c0f14a442",
+      date: "Dec 19, 2020",
+      imageSrc: "https://miro.medium.com/max/1400/1*5KQd_ryoVCcom5cXTnEfmg.png",
+    },
+    {
+      title: "DeFi Yield Protocol Launches Staking and Governance dApp",
+      link: "https://u.today/defi-yield-protocol-launches-staking-and-governance-dapp",
+      date: "Dec 21, 2020",
+      imageSrc:
+        "https://u.today/sites/default/files/styles/736x/public/2020-12/5825.jpg",
+    },
+    {
+      title: "DYP Launches Staking and Governance DAPP",
+      link: "https://news.bitcoin.com/dyp-launches-staking-and-governance-dapp/",
+      date: "Dec 22, 2020",
+      imageSrc:
+        "https://static.news.bitcoin.com/wp-content/uploads/2020/12/pArZKqh3-photo5406875453978952719.jpg",
+    },
+    {
+      title: "DeFi Yield Protocol Debuts New Staking And Governance DApp",
+      link: "https://bitcoinist.com/defi-yield-protocol-debuts-new-staking-and-governance-dapp/",
+      date: "Dec 23, 2020",
+      imageSrc:
+        "https://bitcoinist.com/wp-content/uploads/2020/11/Yield-Farming.jpg",
+    },
+    {
+      title: "DeFi Projects That Offer Top Staking Rewards in 2021",
+      link: "https://hackernoon.com/defi-projects-that-offer-top-staking-rewards-in-2021-7fs34qs",
+      date: "Dec 24, 2020",
+      imageSrc:
+        "https://hackernoon.com/_next/image?url=https%3A%2F%2Fcdn.hackernoon.com%2Fimages%2F7LrDe0NwaTW40HBSsVuBSPeo2yd2-1p2p31oo.jpeg&w=3840&q=75",
+    },
+    {
+      title:
+        "DeFi Yield Protocol Launches Staking and Governance Dapp, DYP Holders Earn Ethereum",
+      link: "https://www.newsbtc.com/news/company/defi-yield-protocol-launches-staking-and-governance-dapp-dyp-holders-earn-ethereum/",
+      date: "Dec 24, 2020",
+      imageSrc:
+        "https://www.newsbtc.com/wp-content/uploads/2020/12/Epey0x_XcAUpVUq.jpg",
+    },
+    {
+      title:
+        "The DeFi Yield Protocol (DYP) Looks Poised to take DeFi to Next Level",
+      link: "https://crypto.news/defi-yield-protocol-dyp/",
+      date: "Dec 24, 2020",
+      imageSrc: "https://crypto.news/app/uploads/2020/12/DYP-staking.jpg",
+    },
+    {
+      title:
+        "DeFi Yield Protocol (DYP) Provides a New Level of Transparency to the Market",
+      link: "https://www.bitcoininsider.org/article/100387/defi-yield-protocol-dyp-provides-new-level-transparency-market",
+      date: "Dec 24, 2020",
+      imageSrc:
+        "https://www.bitcoininsider.org/sites/default/files/styles/scale_900px/public/field/image/defi_yield_protocol.webp?itok=2ehPm3JM",
+    },
+    {
+      title:
+        "DeFi Yield Protocol Liquidity Providers Earn $25,000 in ETH per Day Staking DYP",
+      link: "https://www.cryptocompare.com/coins/guides/defi-yield-protocol-liquidity-providers-earn-25-000-in-eth-per-day-staking-dyp/",
+      date: "Dec 28, 2020",
+      imageSrc:
+        "https://www.cryptocompare.com/media/37621945/photo_2020-12-23-172208.jpeg",
+    },
+    {
+      title:
+        "Tackling Volatility Issues for Liquidity Providers with DeFi Yield Protocol (DYP)",
+      link: "https://cryptopotato.com/tackling-volatility-issues-for-liquidity-providers-with-defi-yield-protocol-dyp/",
+      date: "Jan 5, 2021",
+      imageSrc:
+        "https://www.bitcoininsider.org/sites/default/files/styles/scale_900px/public/field/image/defi_yield_protocol.webp?itok=2ehPm3JM",
+    },
+    {
+      title: "5 DeFi Projects You Should Know About in 2021",
+      link: "https://hackernoon.com/5-defi-projects-you-should-know-about-in-2021-irq347a",
+      date: "Jan 16, 2021",
+      imageSrc:
+        "https://hackernoon.com/_next/image?url=https%3A%2F%2Fcdn.hackernoon.com%2Fimages%2F7LrDe0NwaTW40HBSsVuBSPeo2yd2-tsg3140.jpeg&w=1200&q=75",
+    },
+    {
+      title:
+        "DeFi Yield Protocol: The First Manipulation Free DeFi platform in BSC and ETH",
+      link: "https://www.bitcoininsider.org/article/110411/defi-yield-protocol-first-manipulation-free-defi-platform-bsc-and-eth",
+      date: "Jan 16, 2021",
+      imageSrc:
+        "https://www.bitcoininsider.org/sites/default/files/styles/scale_900px/public/field/image/defi-yield-protocol.webp?itok=9O5edgCR",
+    },
+    {
+      title: "DYP Maximizing the Benefits of Yield Farming Protocols",
+      link: "https://coindoo.com/dyp-maximizing-the-benefits-of-yield-farming-protocols/",
+      date: "Aug 6, 2021",
+      imageSrc:
+        "https://coindoo.com/wp-content/uploads/2020/12/Stake-and-Learn.jpg",
+    },
+    {
+      title: "PR: How to Use DYP to Earn Big DeFi ROIs",
+      link: "https://coingape.com/how-to-use-dyp-to-earn-big-defi-rois/",
+      date: "Dec 23, 2020",
+      imageSrc:
+        "https://cdn.coingape.com/wp-content/uploads/2020/12/23193423/IMG_4770-min.jpg",
+    },
+  ];
 
-      year: "2022",
-      content: {
-        imageSrc:
-          "https://pbs.twimg.com/media/FNA4t82WUAUfX9z?format=jpg&name=medium",
-        title: "March - DYP Vault is ready for action!",
-        content:
-          "📢 It's official! ⚡️ #DYP Vault is ready for action. <br/><br> 🔥 Check out our contracts with no lock time, deposit your #crypto and let us do the rest. 🚀 <br/><br/> 👉<a href='https://dyp.finance/vault-new' target='_blank'>dyp.finance/vault-new<a/><br/><br/>👏 Doing #crypto is easy with $DYP!",
+  const owlCarouselOptions = {
+    loop: true,
+    margin: 0,
+    center: false,
+    nav: false,
+    dots: true,
+    autoplay: false,
+    rewind: true,
+    autoplayTimeout: 5000,
+    responsiveClass: true,
+    responsiveRefreshRate: true,
+    responsive: {
+      0: {
+        items: 1,
       },
+      576: {
+        items: 1,
+      },
+      768: {
+        items: 1,
+      },
+      960: {
+        items: 1,
+      },
+      1200: {
+        items: 1,
+      },
+      1920: {
+        items: 1,
+      },
+    },
+  };
+
+  const otherNews = [
+    {
+      title: "Gate.io $DYP Lock-up ＆ Earn #3",
+      imageSrc:
+        "https://pbs.twimg.com/media/FTG42MYWQAImetj?format=jpg&name=large",
+      date: "May 19, 2022",
+      link: "https://twitter.com/gate_io/status/1527204993052426241",
+      content: {
+        imageSrc: 'https://pbs.twimg.com/media/FTG42MYWQAImetj?format=jpg&name=large',
+        title: 'Gate.io $DYP Lock-up ＆ Earn #3',
+        content: `🔒#Gateio $DYP Lock-up ＆ Earn #3 @dypfinance <br/><br/> 
+        🔷Token: $DYP <br/> 🔶Term: 7 days<br/> ⚡️Annual Interest Rate:150%<br/> 🕘Start: May 21, 8:00:00 UTC<br/>
+        ➡️Try out: <a href='https://www.gate.io/zh/hodl/1263?ch=hodl_twi0516' target='_blank'><u>gate.io</u></a><br/>
+        ➡️Check more: <a href='https://www.gate.io/zh/article/26591?ch=en_sm_0522' target='_blank'><u>gate.io</u></a>`,
+      }
     },
     {
       date: "22",
@@ -192,6 +414,56 @@ const News = ({ theme }) => {
       },
     },
     {
+      date: "10",
+      month: "May",
+      title: "New smart contract for DYP staking!",
+      link: "https://twitter.com/dypfinance/status/1524075021379022848",
+      imageSrc:
+        "https://pbs.twimg.com/media/FSKsEt2XMAA-ZUX?format=jpg&name=medium",
+      year: "2022",
+      content: {
+        imageSrc:
+          "https://pbs.twimg.com/media/FSKsEt2XMAA-ZUX?format=jpg&name=medium",
+        title: "New smart contract for DYP staking!",
+        content:
+          'The game has changed! ⤵️ <br/><br> 💰 Stake your #DYP and earn 25% APR in #ETH, #AVAX or #BNB. <br/><br/>This new smart contract is available on all blockchains: ETH, BSC & C-CHAIN 👉🏽 no impermanent loss. <br/><br/>It all starts today! ⚡️<br/><br/>🔛<a href="https://dyp.finance/stakev2" target="_blank">dyp.finance/stakev2</a>',
+      },
+    },
+    {
+      date: "14",
+      month: "Apr",
+      title: "Gate.io support for DYP on BNB Chain and C-CHAIN!",
+      link: "https://twitter.com/dypfinance/status/1514627082025852936",
+      imageSrc:
+        "https://pbs.twimg.com/media/FQUJHzJXEA0kQ7h?format=jpg&name=medium",
+
+      year: "2022",
+      content: {
+        imageSrc:
+          "https://pbs.twimg.com/media/FQUJHzJXEA0kQ7h?format=jpg&name=medium",
+        title: "Gate.io support for DYP on BNB Chain and C-CHAIN!",
+        content:
+          "Now check this out! 🔊 <br/><br> Starting from today you can trade $DYP on Gate.io also on #BSC/BEP20 and #AVAX/C-CHAIN - no bridge required. 💥 <br/><br/>And this is only the beginning! 🚀",
+      },
+    },
+    {
+      date: "4",
+      month: "Mar",
+      title: "March - DYP Vault is ready for action!",
+      link: "https://twitter.com/dypfinance/status/1499761913001136136",
+      imageSrc:
+        "https://pbs.twimg.com/media/FNA4t82WUAUfX9z?format=jpg&name=medium",
+
+      year: "2022",
+      content: {
+        imageSrc:
+          "https://pbs.twimg.com/media/FNA4t82WUAUfX9z?format=jpg&name=medium",
+        title: "March - DYP Vault is ready for action!",
+        content:
+          "📢 It's official! ⚡️ #DYP Vault is ready for action. <br/><br> 🔥 Check out our contracts with no lock time, deposit your #crypto and let us do the rest. 🚀 <br/><br/> 👉<a href='https://dyp.finance/vault-new' target='_blank'><u>dyp.finance/vault-new</u><a/><br/><br/>👏 Doing #crypto is easy with $DYP!",
+      },
+    },
+    {
       date: "15",
       month: "Dec",
       title: "Staking, Farming, and Buyback V2 ETH",
@@ -204,7 +476,7 @@ const News = ({ theme }) => {
           "https://miro.medium.com/max/1400/1*uQCbsnPYwQdlQ8Wdtrgojg.jpeg",
         title: "Staking, Farming, and Buyback V2 ETH",
         content:
-          "We are excited to announce that the new pools for staking, buyback, and farming have been launched on #Ethereum <br/><br> Join staking if you are holding #DYP or buyback & farming if you are holding WETH, WBTC, USDC, USDT, LINK or #iDYP and earn #ETH as rewards👇<br/><br/>  <a href ='https://dyp.finance/earnv2' target ='_blank'>dyp.finance/earnv2</a>",
+          "We are excited to announce that the new pools for staking, buyback, and farming have been launched on #Ethereum <br/><br> Join staking if you are holding #DYP or buyback & farming if you are holding WETH, WBTC, USDC, USDT, LINK or #iDYP and earn #ETH as rewards👇<br/><br/>  <a href ='https://dyp.finance/earnv2' target ='_blank'><u>dyp.finance/earnv2</u></a>",
       },
     },
     {
@@ -220,7 +492,7 @@ const News = ({ theme }) => {
           "https://miro.medium.com/max/1400/1*edJgopIexXunb7eiy4KTvA.jpeg",
         title: "Staking, Farming, and Buyback V2 AVAX",
         content:
-          "We are excited to announce that the new pools for staking, buyback, and farming have been launched on #Avalanche <br/><br> Join staking if you are holding #DYP or buyback & farming if you are holding #AVAX, USDC, WETH, #PNG, or WBTC, and earn #AVAX as rewards👇 <br/><br/>  <a href ='https://dyp.finance/earnv2' target ='_blank'>dyp.finance/earnv2</a>",
+          "We are excited to announce that the new pools for staking, buyback, and farming have been launched on #Avalanche <br/><br> Join staking if you are holding #DYP or buyback & farming if you are holding #AVAX, USDC, WETH, #PNG, or WBTC, and earn #AVAX as rewards👇 <br/><br/>  <a href ='https://dyp.finance/earnv2' target ='_blank'><u>dyp.finance/earnv2</u></a>",
       },
     },
     {
@@ -511,6 +783,46 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
       imageSrc:
         "https://miro.medium.com/max/1400/1*lkIkivLimWQL_eT2pfd64A.jpeg",
       year: "2021",
+      content: {
+        imageSrc:
+          "https://miro.medium.com/max/1400/1*lkIkivLimWQL_eT2pfd64A.jpeg",
+        title: "DeFi Yield Protocol launches NFT dApp V1",
+        content: `NFTs are the collectible cards of today’s world. Instead, they are unique and exist on the blockchain. With the rise in the popularity of NFTs, every blockchain project wants to add an NFT marketplace to its platform. However, creating a thriving NFT marketplace requires robust integration with an underlying protocol.<br/><br/>
+        DeFi Yield Protocol, a decentralized platform with an aim to create a transparent, unbiased, and reliable network, is launching its <a href='https://nft.dyp.finance/' target='_blank'><u>NFT dApp V1</u></a>.<br/><br/>
+        <b>About the NFT dApp</b><br/><br/>
+        <a href='https://dyp.finance/' target='_blank'><u>DeFi Yield Protocol</u></a> is a Yield Farming protocol that aims to mitigate the whale manipulation found on other platforms. The latest addition of the NFT dApp will add value to the already invaluable ecosystem and provide new use cases for the community.<br/><br/>
+        This NFT dApp will be launched on the Ethereum network, which will act as the de-facto platform for artists to trade, mint, sell, buy and auction their unique digital assets. The lower transaction costs and the environmentally friendly approach of the DYP’s <a href='https://nft.dyp.finance/' target='_blank'><u>NFT dApp</u></a> distinguish it from other dApps.<br/><br/>
+        This release will be a monumental achievement for the DYP ecosystem as it will open up various opportunities for the artists and the art world.
+        <b>The UI of DYP’s NFT dApp</b><br/>
+        The NFT dApp by Defi Yield Protocol acts as a marketplace and a gallery where users can mint, buy, sell and trade NFTs for a fixed price. Every NFT will be associated with an image, title, description, ID, and some tags. Users can either search for a particular NFT using the ID or browse in the gallery using the artist’s name and profile picture.<br/><br/>
+        The app will contain the following elements:<br/><br/>
+        •<b>Marketplace List Page:</b>On this page, all the listings will be displayed along with their price and the option to purchase them.<br/><br/>
+        •<b>Create Page:</b>Artists and users can upload their artwork here as a JPG file with the item’s description to create an NFT. By paying the creation fee to the admin wallet, users will be able to see their minted NFTs in their wallets.<br/><br/>
+        •<b>My Account Page:</b>My account page will allow the users to see their Ether and NFT balance, the tokens they own or are listed for sale. They can also unlist their tokens here to take them out of the Marketplace List Page.<br/><br/>
+        •<b>Non-Fungible Token Details Page:</b>On the marketplace list page, when users click on an NFT, they will be redirected to this page to see all the info about the NFT, such as artists’ name, title, description, etc.<br/><br/><br/>
+        <b>The Launch NFT Collection by Nidia Toska</b><br/>
+        Prior to the launch of the dApp, DYP has collaborated with <a href='https://www.instagram.com/nidia_art/' target='_blank'><u>Nidia Toska</u></a>, a renowned fashion illustrator and designer, to create the first collection to be listed on the marketplace. <a href='https://www.instagram.com/nidia_art/' target='_blank'><u>Nidia Toska</u></a> is a prominent fashion designer who has worked with celebrities such as Kim Kardashian, Paris Hilton, GQ magazine, and more. Over the years, she has developed an impressive portfolio and is confident with her work.<br/><br/>
+        Nidia takes inspiration from what’s happening in the industry and creates a masterpiece loved by everyone. When she is not working on designing a new piece for someone, she spends hours creating illustrations that she shares on her Instagram channel. It was only a hobby for Nidia, but she gained followers when Kim Kardashian reshared a portrait of hers drawn by Nidia.<br/><br/>
+        Nidia is so confident that she draws all her artwork freehand on an iPad. Every artwork is unique and cannot be imitated, which makes the NFT collection even more special.<br/><br/><br/>
+        <b>About DeFi Yield Protocol</b>
+        The <a href='https://dyp.finance/' target='_blank'><u>DeFi Yield Protocol (DYP)</u></a> is a unique platform that allows virtually any user to provide liquidity and uses an anti-manipulation feature.<br/><br/>
+        DYP provides various products, and the NFT dApp will be the latest addition to the ecosystem. Apart from that, the company offers:<br/><br/>
+        • DYP Vault<br/>
+        • DYP Farms<br/>
+        • DYP Staking<br/>
+        • DYP Referral<br/>
+        • DYP Bridge<br/><br/>
+        Visit DeFi Yield Protocol’s website for more information about the launch.<br/><br/><br/><br/>
+        <b>For more information, please visit us:</b><br/>
+        • <a href='https://dyp.finance/' target='_blank'><u>Official website</u></a><br/>
+        • <a href='https://github.com/dypfinance' target='_blank'><u>DYP Github</u></a><br/>
+        • <a href='https://twitter.com/dypfinance' target='_blank'><u>Twitter</u></a><br/>
+        • <a href='https://t.me/dypfinance' target='_blank'><u>Telegram</u></a><br/>
+        • <a href='https://t.me/dypannouncements' target='_blank'><u>Telegram Announcements</u></a><br/>
+        • <a href='https://discord.com/invite/kYDT6pc' target='_blank'><u>Discord</u></a><br/>
+
+        `,
+      },
     },
     {
       date: "22",
@@ -520,270 +832,34 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
       imageSrc:
         "https://miro.medium.com/max/1400/1*lut5I2B3ZEnaIULOfGnDVw.jpeg",
       year: "2021",
-    },
-  ];
-
-  const press_highlight = [
-    {
-      title: "Yield farming platform announces it’s expanding to Avalanche",
-      link: "https://cointelegraph.com/news/yield-farming-platform-announces-it-s-expanding-to-avalanche",
-      date: "JUL 08, 2021",
-      imageSrc:
-        "https://images.cointelegraph.com/images/717_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjEtMDcvMDczNDU5ZWMtYjUwYi00MmRjLWJjNWMtZmJkZDc3NDdlZjg0LmpwZWc=.jpg",
-    },
-    {
-      title: "DeFi Yield Protocol (DYP) Continues to Expand Its Ecosystem",
-      link: "https://news.bitcoin.com/defi-yield-protocol-dyp-continues-to-expand-its-ecosystem/",
-      date: "Jun 28, 2021",
-      imageSrc:
-        "https://static.news.bitcoin.com/wp-content/uploads/2021/06/dyp.jpg",
-    },
-    {
-      title:
-        "DYP Protocol Staking dApp Launches on Binance Smart Chain (BSC), LPs to earn Passive Income in ETH, DYP, or BNB",
-      link: "https://crypto.news/dyp-protocol-staking-dapp-binance-smart-chain-bsc-lp-passive-income-eth-dyp-bnb/",
-      date: "April 7, 2021",
-      imageSrc:
-        "https://crypto.news/app/uploads/2021/04/DeFi-Yield-Protocol-Community-Update%E2%80%8A%E2%80%94%E2%80%8AStaking-Pools-Tutorial-on-Binance-Smart-Chain.jpg",
-    },
-    {
-      title: "DeFi Yield Protocol Takes Yield Farming to the Next Level",
-      link: "https://www.newsbtc.com/press-releases/defi-yield-protocol-takes-yield-farming-to-the-next-level/",
-      date: "July 12, 2020",
-      imageSrc:
-        "https://www.newsbtc.com/wp-content/uploads/2020/10/dyp-img.png",
-    },
-    {
-      title:
-        "DeFi Yield Protocol Could Be a Massive Boost for Yield Farmers and the DeFi Space",
-      link: "https://www.cryptocompare.com/coins/guides/defi-yield-protocol-could-be-a-massive-boost-for-yield-farmers-and-the-defi-space/",
-      date: "13 Nov, 2020",
-      imageSrc: "https://www.cryptocompare.com/media/37459245/graph.jpg",
-    },
-    {
-      title:
-        "DeFi Yield Protocol (DYP) Eliminates the Risks of Whale Interference",
-      link: "https://coindoo.com/defi-yield-protocol-dyp-eliminates-the-risks-of-whale-interference/",
-      date: "Aug 6, 2021",
-      imageSrc:
-        "https://coindoo.com/wp-content/uploads/2020/11/DeFi-Yield-Protocol-DYP.jpg",
-    },
-    {
-      title:
-        "DeFi Yield Protocol: The First Manipulation Free DeFi platform in BSC and ETH",
-      link: "https://techbullion.com/defi-yield-protocol-the-first-manipulation-free-defi-platform-in-bsc-and-eth/",
-      date: " Apr 10, 2021",
-      imageSrc:
-        "https://techbullion.com/wp-content/uploads/2021/04/DYP-cast-your-vote-1.jpg",
-    },
-    {
-      title: "DYP.Finance: A Unique Yield Farming Platform",
-      link: "https://www.newsbtc.com/news/company/dyp-finance-a-unique-yield-farming-platform/",
-      date: " Apr 10, 2020",
-      imageSrc: "https://www.newsbtc.com/wp-content/uploads/2020/11/5.jpg",
-    },
-    {
-      title: "DYP.Finance: A Unique Yield Farming Platform",
-      link: "https://www.cryptocompare.com/coins/guides/dypfinance-a-unique-yield-farming-platform/",
-      date: "Nov 16, 2020",
-      imageSrc: "https://www.cryptocompare.com/media/37459277/img_0834.jpg",
-    },
-    {
-      title:
-        "DeFi Yield Protocol (DYP) Launches Staking Pools on Binance Smart Chain",
-      link: "https://u.today/defi-yield-protocol-dyp-launches-staking-pools-on-binance-smart-chain?amp",
-      date: "Apr 12, 2021",
-      imageSrc:
-        "https://u.today/sites/default/files/styles/736x/public/2021-04/7180.jpg",
-    },
-    {
-      title: "DYP Launches Staking DApp on Binance Smart Chain (BSC)n",
-      link: "https://blockonomi.com/dyp-staking-app-binance-smart-chain/",
-      date: "Apr 15, 2021",
-      imageSrc:
-        "https://blockonomi-9fcd.kxcdn.com/wp-content/uploads/2021/02/defi-yield-770x515.jpg",
-    },
-    {
-      title:
-        "DeFi Yield Protocol (DYP) Witnesses Massive Growth Following Binance Smart Chain Integration",
-      link: "https://news.bitcoin.com/defi-yield-protocol-dyp-witnesses-massive-growth-following-binance-smart-chain-integration/",
-      date: "Apr 9, 2021",
-      imageSrc:
-        "https://static.news.bitcoin.com/wp-content/uploads/2021/04/RuCUQmM6-dyp-7-prill-1-1280x720.jpg",
-    },
-    {
-      title: "DeFi Yield Protocol (DYP): All in One Platform Yielding Benefits",
-      link: "https://cryptopotato.com/defi-yield-protocol-dyp-all-in-one-platform-yielding-benefits/",
-      date: "Nov 30, 2020",
-      imageSrc:
-        "https://cryptopotato.com/wp-content/uploads/2020/11/defiyieldprotocol_cover.jpg",
-    },
-    {
-      title: "DYP Launches Staking DApp on Binance Smart Chain (BSC)",
-      link: "https://techbullion.com/dyp-launches-staking-dapp-on-binance-smart-chain-bsc/",
-      date: "Apr 19, 2021",
-      imageSrc:
-        "https://techbullion.com/wp-content/uploads/2021/04/DYP-Launches-Staking-DApp-DYPFinance.jpg",
-    },
-    {
-      title:
-        "Earn compound yields on Binance Smart Chain using DeFi Yield Protocol (DYP)",
-      link: "https://coincodex.com/article/11092/earn-compound-yields-on-binance-smart-chain-using-defi-yield-protocol-dyp/",
-      date: "Apr 21, 2021",
-      imageSrc:
-        "https://coincodex.com/en/resources/images//admin/news/earn-compound-yields/image1.jpg:resizeboxcropjpg?1050x590",
-    },
-    {
-      title: "DYP.Finance – Stake DeFi Tokens and Get Paid in ETH",
-      link: "https://techbullion.com/dyp-finance-stake-defi-tokens-and-get-paid-in-eth/",
-      date: "Dec 19, 2020",
-      imageSrc:
-        "https://techbullion.com/wp-content/uploads/2020/12/Defi-Yield-Protocol.jpg",
-    },
-    {
-      title: "DeFi Yield Protocol (DYP) Staking and Governance is Now Live",
-      link: "https://medium.com/the-capital/defi-yield-protocol-dyp-staking-and-governance-is-now-live-e18c0f14a442",
-      date: "Dec 19, 2020",
-      imageSrc: "https://miro.medium.com/max/1400/1*5KQd_ryoVCcom5cXTnEfmg.png",
-    },
-    {
-      title: "DeFi Yield Protocol Launches Staking and Governance dApp",
-      link: "https://u.today/defi-yield-protocol-launches-staking-and-governance-dapp",
-      date: "Dec 21, 2020",
-      imageSrc:
-        "https://u.today/sites/default/files/styles/736x/public/2020-12/5825.jpg",
-    },
-    {
-      title: "DYP Launches Staking and Governance DAPP",
-      link: "https://news.bitcoin.com/dyp-launches-staking-and-governance-dapp/",
-      date: "Dec 22, 2020",
-      imageSrc:
-        "https://static.news.bitcoin.com/wp-content/uploads/2020/12/pArZKqh3-photo5406875453978952719.jpg",
-    },
-    {
-      title: "DeFi Yield Protocol Debuts New Staking And Governance DApp",
-      link: "https://bitcoinist.com/defi-yield-protocol-debuts-new-staking-and-governance-dapp/",
-      date: "Dec 23, 2020",
-      imageSrc:
-        "https://bitcoinist.com/wp-content/uploads/2020/11/Yield-Farming.jpg",
-    },
-    {
-      title: "DeFi Projects That Offer Top Staking Rewards in 2021",
-      link: "https://hackernoon.com/defi-projects-that-offer-top-staking-rewards-in-2021-7fs34qs",
-      date: "Dec 24, 2020",
-      imageSrc:
-        "https://hackernoon.com/_next/image?url=https%3A%2F%2Fcdn.hackernoon.com%2Fimages%2F7LrDe0NwaTW40HBSsVuBSPeo2yd2-1p2p31oo.jpeg&w=3840&q=75",
-    },
-    {
-      title:
-        "DeFi Yield Protocol Launches Staking and Governance Dapp, DYP Holders Earn Ethereum",
-      link: "https://www.newsbtc.com/news/company/defi-yield-protocol-launches-staking-and-governance-dapp-dyp-holders-earn-ethereum/",
-      date: "Dec 24, 2020",
-      imageSrc:
-        "https://www.newsbtc.com/wp-content/uploads/2020/12/Epey0x_XcAUpVUq.jpg",
-    },
-    {
-      title:
-        "The DeFi Yield Protocol (DYP) Looks Poised to take DeFi to Next Level",
-      link: "https://crypto.news/defi-yield-protocol-dyp/",
-      date: "Dec 24, 2020",
-      imageSrc: "https://crypto.news/app/uploads/2020/12/DYP-staking.jpg",
-    },
-    {
-      title:
-        "DeFi Yield Protocol (DYP) Provides a New Level of Transparency to the Market",
-      link: "https://www.bitcoininsider.org/article/100387/defi-yield-protocol-dyp-provides-new-level-transparency-market",
-      date: "Dec 24, 2020",
-      imageSrc:
-        "https://www.bitcoininsider.org/sites/default/files/styles/scale_900px/public/field/image/defi_yield_protocol.webp?itok=2ehPm3JM",
-    },
-    {
-      title:
-        "DeFi Yield Protocol Liquidity Providers Earn $25,000 in ETH per Day Staking DYP",
-      link: "https://www.cryptocompare.com/coins/guides/defi-yield-protocol-liquidity-providers-earn-25-000-in-eth-per-day-staking-dyp/",
-      date: "Dec 28, 2020",
-      imageSrc:
-        "https://www.cryptocompare.com/media/37621945/photo_2020-12-23-172208.jpeg",
-    },
-    {
-      title:
-        "Tackling Volatility Issues for Liquidity Providers with DeFi Yield Protocol (DYP)",
-      link: "https://cryptopotato.com/tackling-volatility-issues-for-liquidity-providers-with-defi-yield-protocol-dyp/",
-      date: "Jan 5, 2021",
-      imageSrc:
-        "https://www.bitcoininsider.org/sites/default/files/styles/scale_900px/public/field/image/defi_yield_protocol.webp?itok=2ehPm3JM",
-    },
-    {
-      title: "5 DeFi Projects You Should Know About in 2021",
-      link: "https://hackernoon.com/5-defi-projects-you-should-know-about-in-2021-irq347a",
-      date: "Jan 16, 2021",
-      imageSrc:
-        "https://hackernoon.com/_next/image?url=https%3A%2F%2Fcdn.hackernoon.com%2Fimages%2F7LrDe0NwaTW40HBSsVuBSPeo2yd2-tsg3140.jpeg&w=1200&q=75",
-    },
-    {
-      title:
-        "DeFi Yield Protocol: The First Manipulation Free DeFi platform in BSC and ETH",
-      link: "https://www.bitcoininsider.org/article/110411/defi-yield-protocol-first-manipulation-free-defi-platform-bsc-and-eth",
-      date: "Jan 16, 2021",
-      imageSrc:
-        "https://www.bitcoininsider.org/sites/default/files/styles/scale_900px/public/field/image/defi-yield-protocol.webp?itok=9O5edgCR",
-    },
-    {
-      title: "DYP Maximizing the Benefits of Yield Farming Protocols",
-      link: "https://coindoo.com/dyp-maximizing-the-benefits-of-yield-farming-protocols/",
-      date: "Aug 6, 2021",
-      imageSrc:
-        "https://coindoo.com/wp-content/uploads/2020/12/Stake-and-Learn.jpg",
-    },
-    {
-      title: "PR: How to Use DYP to Earn Big DeFi ROIs",
-      link: "https://coingape.com/how-to-use-dyp-to-earn-big-defi-rois/",
-      date: "Dec 23, 2020",
-      imageSrc:
-        "https://cdn.coingape.com/wp-content/uploads/2020/12/23193423/IMG_4770-min.jpg",
-    },
-  ];
-
-  const owlCarouselOptions = {
-    loop: true,
-    margin: 0,
-    center: false,
-    nav: false,
-    dots: true,
-    autoplay: false,
-    rewind: true,
-    autoplayTimeout: 5000,
-    responsiveClass: true,
-    responsiveRefreshRate: true,
-    responsive: {
-      0: {
-        items: 1,
+      content: {
+        imageSrc:
+          "https://miro.medium.com/max/1400/1*lut5I2B3ZEnaIULOfGnDVw.jpeg",
+        title: "DeFi Yield Protocol Integrates Chainlink",
+        content: `We’re excited to announce that DeFi Yield Protocol, a unique platform that allows any user to provide liquidity has integrated <a href='https://data.chain.link/' target='_blank'><u>Chainlink Price Feeds</u></a> on the Ethereum and Binance Smart Chain mainnet. By integrating Chainlink’s industry-leading decentralized oracle network, DeFi Yield Protocol has access to high-quality, tamper-proof price feeds needed to provide the exact value in USD. This will provide our users with strong assurances that all the values are provided in a fully decentralized manner and cannot be manipulated.<br/><br>
+        Our initial integration involves the use of the following Chainlink Price Feeds: ETH-USD and BNB-USD. We chose Chainlink as our go-to oracle solution because its infrastructure is seamless to integrate and time-tested in production. Chainlink already secures leading DeFi protocols responsible for billions of dollars in smart contract value, maintaining robust security and high availability even amidst unexpected events, such as exchange downtime, flash crashes, and <a href='https://blog.chain.link/flash-loans/' target='_blank'><u>data manipulation attacks via flash loans.</u></a><br/><br/>
+        DeFi Yield Protocol is a unique platform that allows any user to provide liquidity and uses an anti-manipulation feature.<br/><br/>
+        The core feature of DeFi Yield Protocol is the decentralized tools dashboard (DYP Tools). DYP Tools provide a liquidity locker for any DeFi project, a unique voting system, and at the same time protect the DeFi community by providing a decentralized trust score for all the DeFi projects.<br/><br/>
+        In order to secure our ETH and BNB data values in a decentralized manner, we needed access to fresh asset prices that are supplied directly on-chain in a highly reliable manner. Fair market asset prices should reflect a volume-weighted average from all trading environments, so we need to make use of an oracle to fetch aggregated price data off-chain and deliver it on-chain to be consumed by our application.<br/><br/>
+        After reviewing various oracle solutions, we integrated Chainlink Price Feeds because they provide a multitude of critical features such as:<br/><br/>
+        • <b>High-Quality Data</b> — Chainlink Price Feeds source data from numerous premium data aggregators, ensuring broad market coverage through price data that’s aggregated from hundreds of exchanges, weighted by volume, and cleaned of outliers and wash trading. Chainlink’s data aggregation model generates accurate global market prices that are inherently resistant to inaccuracies or manipulation of any single or small set of exchanges.<br/><br/>
+        • <b>Secure Node Operators</b> — Chainlink Price Feeds are secured by independent, security-reviewed, and Sybil-resistant oracle nodes run by leading blockchain DevOps teams, data providers, and traditional enterprises. Chainlink nodes have a strong track record of reliability, even during high gas prices and infrastructure outages.<br/><br/>
+        • <b>Decentralized Network</b> — Chainlink Price Feeds are decentralized at the data source, oracle node, and oracle network levels, generating strong protections against downtime and tampering by either the data provider or oracle network.<br/><br/>
+        • <b>Reputation System</b> — Chainlink provides a robust reputation framework and set of on-chain monitoring tools that allow users to independently verify the historical and real-time performance of node operators and oracle networks.<br/><br/><br>
+        In the near future we plan on using Chainlink for providing additional price feeds for all of our farming, staking, and vault pools. Also, we want to integrate Chainlink services on DYP Tools to provide a better experience for all the users.<br/><br/>
+        "Without doubt Chainlink is the most powerful and reliable Oracle when it comes to High-Quality Data, Secure Node Operators, Decentralized Network, and Reputation System. From the beginning we have put the security and transparency for our project in the first place. By integrating Chainlink services we manage to add more security and transparency to our whole ecosystem. This is one of the most important tasks for any DeFi platform! We look forward on adding more with Chainlink!"<br/><br/>
+        Mihai Nicusor Busica — CEO DeFi Yield Protocol<br/><br/>
+        <b>About Chainlink</b><br/><br/>
+        Chainlink is the industry standard oracle network for powering hybrid smart contracts. Chainlink Decentralized Oracle Networks provide developers with the largest collection of high-quality data sources and secure off-chain computations to expand the capabilities of smart contracts on any blockchain. Managed by a global, decentralized community, Chainlink currently secures billions of dollars in value for smart contracts across decentralized finance (DeFi), insurance, gaming, and other major industries.<br/><br/>
+        Chainlink is trusted by hundreds of organizations, from global enterprises to projects at the forefront of the blockchain economy, to deliver definitive truth via secure, reliable oracle networks. To learn more about Chainlink, visit <a href='https://chain.link/' target='_blank'><u>chain.link</u></a>, subscribe to the <a href='https://pages.chain.link/subscribe' target='_blank'><u>Chainlink newsletter</u></a>, and follow <a href='https://twitter.com/chainlink' target='_blank'><u>@chainlink</u></a> on Twitter. To understand the full vision of the Chainlink Network, read the <a href='https://chain.link/whitepaper' target='_blank'><u>Chainlink 2.0 whitepaper</u></a>.<br/><br/>
+        <b>About DeFi Yield Protocol</b><br/><br/>
+        The DeFi Yield Protocol (DYP) is a unique platform offering solutions for yield farming, staking, NFTs, and enabling users to leverage the advanced trading tools of the DYP. What makes the DYP a unique yield farming aggregator?<br/><br/>
+        The DYP has made history in the DeFi space by becoming the first and only protocol that employs an anti-manipulation feature, aiming to limit the market impact on users.<br/><br/>
+        Anti-manipulation targets to keep stability, fair access to liquidity, and supply a secure and simplified DeFi platform for users of all sizes.<br/><br/>
+        The central feature of the DYP is the decentralized tool dashboard. It provides advanced features, including Decentralized Score, Unique Community Trust Vote System, DYP Locker, Yield Farm Data, and Launch Pad, allowing users to make informed decisions.<br/><br/>
+        <b><a href='https://dyp.finance/' target='_blank'><u>Website</u></a> | <a href='https://t.me/dypannouncements' target='_blank'><u>Announcements</u></a> | <a href='https://discord.com/invite/kYDT6pc' target='_blank'><u>Discord</u> </a> | <a href='https://twitter.com/dypfinance' target='_blank'> <u>Twitter</u> </a>|<a href='https://t.me/dypfinance' target='_blank'> <u>Telegram</u> </a>|<a href='https://github.com/dypfinance' target='_blank'> <u>GitHub</u> </a>|<a href='https://www.youtube.com/channel/UC6Wrn8A-pq79srb9OC-ufXw' target='_blank'> <u>YouTube</u> </a></b><br/><br/>
+        `,
       },
-      576: {
-        items: 1,
-      },
-      768: {
-        items: 1,
-      },
-      960: {
-        items: 1,
-      },
-      1200: {
-        items: 1,
-      },
-      1920: {
-        items: 1,
-      },
-    },
-  };
-
-  const otherNews = [
-    {
-      title: "Gate.io $DYP Lock-up ＆ Earn #3",
-      imageSrc:
-        "https://pbs.twimg.com/media/FTG42MYWQAImetj?format=jpg&name=large",
-      date: "May 19, 2022",
-      link: "https://twitter.com/gate_io/status/1527204993052426241",
     },
     {
       title: "Gate.io $DYP Lock-up ＆ Earn #2",
@@ -791,6 +867,17 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
         "https://pbs.twimg.com/media/FRVwHCUXwAMuR2r?format=jpg&name=large",
       date: "Apr 27, 2022",
       link: "https://twitter.com/gate_io/status/1519243718141874177",
+      content: {
+        imageSrc: 'https://pbs.twimg.com/media/FRVwHCUXwAMuR2r?format=jpg&name=large',
+        title: 'Gate.io $DYP Lock-up ＆ Earn #2',
+        content: `🔒#Gate.io $DYP Lock-up ＆ Earn #2 @dypfinance <br/><br/> 
+        🕘Launch Time: May 1, 8:00:00 UTC<br/><br/>Win an estimated reward of 100% P.A.!<br/><br/>
+        ➡️Purchase: <a href='https://www.gate.io/zh/hodl/1231?ch=en_sm_0422' target='_blank'><u>gate.io</u></a><br/>
+        ➡️Details: <a href='https://www.gate.io/zh/article/26346?ch=en_sm_0422' target='_blank'><u>gate.io</u></a><br/>
+        ➡️Telegram: <a href='https://t.me/gateio_hodl_en' target='_blank'><u>gate.io</u></a><br/>
+
+        `,
+      }
     },
     {
       title: "10 #ETH Giveaway",
@@ -798,6 +885,19 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
         "https://pbs.twimg.com/media/FQpLyBBXMAE8AsS?format=jpg&name=large",
       date: "Apr 18, 2022",
       link: "https://twitter.com/dypfinance/status/1516108338685165569",
+      content: {
+        imageSrc: 'https://pbs.twimg.com/media/FQpLyBBXMAE8AsS?format=jpg&name=large',
+        title: '10 #ETH Giveaway',
+        content: `🚨 Attention #CAWS holders! <br/><br/> 
+        We would like to announce a raffle of 10 #ETH to our community!<br/><br/>To enter:<br/><br/>
+        ✅ Hold at least one CAWS at the time token id #2500 is minted! <br/>
+        ✅ The more CAWS held, the more chances to win!<br/>
+        💰 Prizes:<br/>
+        1 x 2.5 ETH<br/>
+        2 x 1.5 ETH<br/>
+        9 x 0.5 ETH<br/>
+        `,
+      }
     },
     {
       title: "Gate.io $DYP Lock-up ＆ Earn #1",
@@ -805,12 +905,83 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
         "https://pbs.twimg.com/media/FQXlDOEWQAErq1G?format=jpg&name=large",
       date: "Apr 15, 2022",
       link: "https://twitter.com/gate_io/status/1514868696069595139",
+      content: {
+        imageSrc: 'https://pbs.twimg.com/media/FQXlDOEWQAErq1G?format=jpg&name=large',
+        title: 'Gate.io $DYP Lock-up ＆ Earn #1',
+        content: `🔒#Gate.io $DYP Lock-up ＆ Earn #1  @dypfinance<br/><br/> 
+        🕘Launch Time: Apr 18, 8:00:00 UTC<br/><br/>
+        🔶Term: 14 days <br/>
+        🔶Handling Fee: $0<br/>
+        ⚡️APR: 100%<br/><br/>
+        ➡️Purchase:<a href='https://www.gateio.pro/hodl/1213' target='_blank'><u>gate.io</u></a><br/>
+        ➡️Details:<a href='https://www.gate.io/zh/article/26195?ch=en_sm_0422' target='_blank'><u>gate.io</u></a><br/>
+        ➡️Telegram:<a href='https://t.me/gateio_hodl_en' target='_blank'><u>gate.io</u></a><br/>
+
+        `,
+      }
     },
     {
       title: "KyberDMM Joint Liquidity Mining on Avalanche.",
       imageSrc: "https://miro.medium.com/max/1400/1*GRqMiBZbPRrxqWcshIwU8A.png",
       date: "Sep 19, 2021",
       link: "https://twitter.com/dypfinance/status/1439562983663968262?s=20",
+      content: {
+        imageSrc: 'https://miro.medium.com/max/1400/1*GRqMiBZbPRrxqWcshIwU8A.png',
+        title: 'KyberDMM Joint Liquidity Mining on Avalanche.',
+        content: `<h3>We've submitted a proposal to launch one of the first joint liquidity mining programs for the @KyberNetwork #KyberDMM on @avalancheavax featuring $DYP and $KNC rewards!</h3><br/><br/>
+        <b>1. Project Introduction</b><br/>
+        The DeFi Yield Protocol (DYP) is a unique platform that offers solutions for yield farming, staking, NFTs, and enabling users to leverage the advanced trading tools of the DYP. What makes the DYP a unique yield farming aggregator? The DYP made history in the DeFi space by becoming the first and only protocol to reward users in Ethereum.<br/>
+        The protocol employs an anti-manipulation feature that aims to limit the market impact on users’ converting rewards into ETH and other native platform tokens. Anti-manipulation aims to maintain stability, fair access to liquidity, and provide a secure and simplified DeFi platform for users of all sizes.
+        The core feature of the DYP is the decentralized tool dashboard. It provides advanced features, such as Decentralized Score, Unique Community Trust Vote System, DYP Locker, Yield Farm Data, and LaunchPad, allowing investors to make informed decisions that maximize yields and reduce risks.<br/>
+        <b>DeFi Yield Protocol is a multi-chain platform available on Ethereum, Binance Smart Chain, and Avalanche. Since launch our users have earned 8791 ETH, 7195 BNB, and 11438 AVAX worth $34,648,092.</b><br/>
+        What is the use case of DYP token? DYP serves as the fuel for all products in the DeFi Yield Protocol ecosystem and it could be used in the following use cases:<br/><br/>
+        Transaction fees for NFTs smart contract operations<br/>
+        Staking on Ethereum Network<br/>
+        Yield Farming on Ethereum, Binance Smart Chain, and Avalanche<br/>
+        Part of the DYP Earn Vault Strategies<br/>
+        Community voting for decentralized Governance<br/>
+        DYP Referral System<br/>
+        Subscription tokens for DYP Tools Premium<br/>
+        DYP Locker fulfil security for smart contracts by locking their liquidity; DYP is the token used for the liquidity lock<br/>
+        DYP Launchpad v1.0 will offer multiple tiers based on amount of locked DYP<br/><br/>
+        This is just scratching the surface, though. Ultimately, DYP is a requirement for entering the DeFi Yield Protocol ecosystem and unlocking an unprecedented level of security for projects and individual asset holders.<br><br/><br/>
+        <b>2. Proposal Summary, Motivation, and Key Details</b><br/>
+        DeFi Yield Protocol is proposing a joint liquidity program with Kyber on the Avalanche network.<br/><br/>
+        As part of this program, users will be able to provide liquidity to the upcoming DYP-WAVAX pair on KyberDMM to receive dedicated LP tokens. These tokens can be staked to earn dual rewards in both DYP and KNC at a 2:1 ratio.<br/><br/>
+        With the incentivized pool, KyberDMM will become a primary location for DYP trading on Avalanche. Another important aspect of the collaboration will be the integration of DYP Tools with KyberDMM for Ethereum, Binance Smart Chain, and Avalanche networks.<br/><br/>
+        <b>Motivation:</b><br/><br/>
+        DeFi Yield Protocol has been already integrated with Avalanche and launched a couple of products including yield farming with AVAX rewards, buyback program, bridge, and DYP Tools. The integration with Avalanche also includes DYP NFTs and LaunchPad, these products are expected to be launched in the next 30 days. <b>Since the launch of the DYP Farming on Avalanche that happened two months ago, we have paid to the farmers 11438 AVAX worth $830,170. Also, in just one-month DYP worth $370,425.35 has been bought using the Buyback program on Avalanche.</b><br/>
+        DYP Tools launch on Avalanche took place just two weeks ago and we have at least 1000 unique users each week from Avalanche network.<br/><br/>
+        With this program we will attract more DeFi users found within the Kyber community, with DYP-KNC reward distribution. Our goal is to expand both Kyber and DeFi Yield Protocol ecosystems.<br/><br/><br/>
+        <b>3. KNC Amount Requested</b><br/>
+        USD $100k in KNC incentives<br/><br/>
+        <b>4. Project Contribution Amount</b><br/>
+        DeFi Yield Protocol will provide $200k worth of DYP rewards for 8 weeks, in addition to seeding the initial liquidity at a level between $400k and $600k, depending on market conditions at the time of pool creation. The pair will be DYP-WAVAX.<br/><br/>
+        <b>5. Network</b><br/>Avalanche<br/><br/>
+        <b>6. Token pair option</b><br/>Others<br/><br/>
+        <b>7. Vesting Schedule</b><br/>No vesting<br/><br/>
+        <b>8. Campaign Duration</b><br/>2 months<br/><br/>
+        <b>9. Project Details</b><br/>
+        Contact: <a href="mailto:contact@dyp.finance" target='_blank'><u>contact@dyp.finance</u></a><br/>
+        Website: <a href="https://dyp.finance/" target='_blank'><u>dyp.finance</u></a><br/>
+        GitHub: <a href="https://github.com/dypfinance" target='_blank'><u>DYP - GitHub</u></a><br/>
+        Twitter: <a href="https://twitter.com/dypfinance" target='_blank'><u>twitter.com/dypfinance</u></a><br/>
+        Medium: <a href="https://dypfinance.medium.com/" target='_blank'><u>dypfinance.medium.com</u></a><br/>
+        YouTube: <a href="https://www.youtube.com/c/DeFiYieldProtocol" target='_blank'><u>DYP - Youtube</u></a><br/>
+        LinkedIn: <a href="https://www.linkedin.com/company/defi-yield-protocol/" target='_blank'><u>DYP - LinkedIn</u></a><br/>
+        Telegram: <a href="https://t.me/dypfinance" target='_blank'><u>DYP - Telegram</u></a><br/>
+        Telegram Announcements: <a href="https://t.me/dypannouncements" target='_blank'><u>Telegram: Contact @dypannouncements</u></a><br/>
+        Discord: <a href="https://discord.com/invite/kYDT6pc" target='_blank'><u>DeFi Yield Protocol</u></a><br/>
+        Governance: <a href="https://dyp.finance/vote" target='_blank'><u>DeFi Yield Protocol</u></a><br/>
+        Logo: <a href="https://drive.google.com/drive/folders/1cxSk2BjmPPuIFC7Yao_RTBf6eSo6gDmo" target='_blank'><u>Colour Logo Version - Google Drive</u></a><br/>
+        Contract Address: 0x961c8c0b1aad0c0b10a51fef6a867e3091bcef17<br/>
+        Uniswap Analytics: <a href="https://v2.info.uniswap.org/token/0x961c8c0b1aad0c0b10a51fef6a867e3091bcef17" target='_blank'><u>Uniswap Info</u></a><br/>
+        Pangolin Analytics: <a href="https://info.pangolin.exchange/#/token/0x961c8c0b1aad0c0b10a51fef6a867e3091bcef17" target='_blank'><u>Pangolin Analytics</u></a><br/>
+        CoinMarketCap: <a href="https://coinmarketcap.com/currencies/defi-yield-protocol/" target='_blank'><u>DeFi Yield Protocol price today, DYP to USD live, marketcap and chart | CoinMarketCap</u></a><br/>
+        CoinGecko: <a href="https://www.coingecko.com/en/coins/defi-yield-protocol" target='_blank'><u>DeFi Yield Protocol price, DYP chart, market cap, and info | CoinGecko</u></a><br/>
+
+        `,
+      }
     },
     {
       title: "@dypfinance is extending its liquidity mining campaign.",
@@ -818,13 +989,36 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
         "https://pbs.twimg.com/media/E_bHfp3UYAEHsbt?format=jpg&name=4096x4096",
       date: "Sep 16, 2021",
       link: "https://twitter.com/hummingbot_io/status/1438559792927178755?s=20",
-    },
-    {
-      title: "6 new strategies are available for auto-compounding on Snowball.",
-      imageSrc:
-        "https://pbs.twimg.com/media/E9QqIhXUYAE-TXu?format=jpg&name=medium",
-      date: "Aug 20, 2021",
-      link: "https://twitter.com/snowballdefi/status/1428813432183087111?s=20",
+      content: {
+        imageSrc: 'https://pbs.twimg.com/media/E_bHfp3UYAEHsbt?format=jpg&name=4096x4096',
+        title: '12-week extension for DYP Liquidity Mining Campaign!',
+        content: `
+        DYP is extending its campaign on <b>KuCoin</b> for another <b>12-weeks</b>. We will continue payouts in the <b>DYP</b> token from <b>September 14, 2021 to September 20, 2021</b> but for the remaining weeks, payouts will be in <b>USDT</b> beginning on <b>September 21, 2021</b>.<br/><br/>
+        <h3>Campaign Terms</h3><br/><br/>
+        • Start Date: September 21, 2021 00:00 UTC<br/>
+        • Trading Pair: DYP/ETH and  DYP/USDT<br/>
+        • Weekly Rewards: 625 USDT per pair<br/>
+        • Reward token: USDT<br/>
+        • Maximum Spread: 2.00%<br/><br/><br/>
+        <h3>About DeFi Yield Protocol (DYP)</h3><br/><br/>
+        DeFi Yield Protocol is a unique platform that allows any user to provide liquidity, receive rewards in ETH or BNB for the first time since DeFi started, and use an anti-manipulation feature to convert the rewards into ETH or BNB without overly affecting the price. In other words, any person can provide liquidity and earn ETH or BNB with minimum risks.<br/><br/>
+        DeFi Yield Protocol is the FIRST and the ONLY yield farming aggregator that is rewarding the liquidity providers in Ethereum (for the Ethereum Network) or BNB/ETH/DYP (for the Binance Smart Chain Network). In order to lower the risk of DYP price volatility, all pool rewards are automatically converted from DYP to ETH/BNB by the smart contract, and ETH/BNB/DYP is distributed as a reward to the liquidity providers. The users can choose between three different types of rewards: ETH, BNB, or DYP.<br/><br/>
+        The yield farming is available on both Ethereum (ETH, WBTC, USDC, USDT pools on Uniswap) and Binance Smart Chain (BNB, ETH, BUSD pools on PancakeSwap) Networks. The liquidity providers can earn up to 231.64% APY according to DeFi Yield Protocol. It also has a Bridge that will help the users swap DYP tokens between Ethereum Network and Binance Smart Chain Network.<br/><br/>
+        *For full terms of the campaign, please see <a href='https://support.hummingbot.io/hc/en-us/sections/900002130663-Campaigns' target='_blank'><u>liquidity mining campaign terms</u></a>. To learn more about liquidity mining, see below:<br/>
+        • <a href='https://miner.hummingbot.io/' target='_blank'><u>Hummingbot Miner’s app</u></a><br/>
+        • <a href='https://support.hummingbot.io/hc/en-us/sections/900002130663-Campaigns' target='_blank'><u>Hummingbot liquidity mining rewards and terms</u></a><br/>
+        • <a href='https://hummingbot.io/academy/' target='_blank'><u>Hummingbot Academy</u></a><br/>
+        • <a href='https://support.hummingbot.io/hc/en-us/sections/900001100046-Frequently-Asked-Questions' target='_blank'><u>Liquidity mining FAQs</u></a><br/>
+        • <a href='https://discord.com/invite/hummingbot' target='_blank'><u>24/7 support</u></a><br/>
+        <b>Important notes and disclaimers</b><br/><br/>
+        Please review the <a href='https://hummingbot.io/liquidity-mining-policy/' target='_blank'><u>Liquidity Mining Policy</u></a> for the full disclaimer, including policies related to the use of Hummingbot.<br/><br/>
+        The content of this Site does not constitute investment, financial, legal, or tax advice: none of the information contained on this Site constitutes a recommendation, solicitation, or offer to buy or sell any digital assets, securities, options, or other financial instruments or other assets, or to provide any investment advice or service.<br/><br/>
+        <b>No guarantee of profit</b>: CoinAlpha does not claim that liquidity mining and participation in liquidity mining campaigns will be profitable, however measured, for the user. Liquidity mining yields are a measure of rewards compared to assets used for liquidity mining, excluding any gains or losses incurred from the underlying trading strategy.<br/><br/>
+        1. <b>Eligibility requirements:</b> participation in liquidity mining is subject to eligibility requirements as specified in the <a href='https://hummingbot.io/en/liquidity-mining-policy/' target='_blank'><u>liquidity mining policy</u></a>.<br/>
+        2. <b>Campaign terms subject to change:</b> terms may be modified over the course of the campaign. We will announce any changes, if any, on our <a href='https://discord.com/invite/hummingbot' target='_blank'><u>discord</u></a> and <a href='https://www.reddit.com/r/Hummingbot/' target='_blank'><u>reddit</u></a>; the most up to date terms will also be posted on the <a href='https://support.hummingbot.io/hc/en-us/sections/900002130663-Campaigns' target='_blank'><u>liquidity mining campaign terms</u></a> and the <a href='https://miner.hummingbot.io/' target='_blank'><u>miners app</u></a>.<br/>
+
+        `,
+      }
     },
     {
       title: "New $PNG reward pools are ready for pre-deposits!",
@@ -832,6 +1026,14 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
         "https://pbs.twimg.com/media/E9NFwuPVoAQMtdw?format=png&name=900x900",
       date: "Aug 20, 2021",
       link: "https://twitter.com/pangolindex/status/1428563006481260547?s=20",
+      content: {
+        title: 'New $PNG reward pools are ready for pre-deposits!',
+        imageSrc: 'https://pbs.twimg.com/media/E9NFwuPVoAQMtdw?format=png&name=900x900',
+        content: `<h3>💰New $PNG reward pools are ready for pre-deposits!</h3><br/><br>
+        ⏰Rewards start Friday at 1pm UTC<br/><br/>$QI $DYP $WALBT<br/><br/>
+        🚀AVAX-QI 1x<br/>🚀PNG-QI 5x<br/>🚀AVAX-DYP 1x <br/>🚀PNG-DYP 5x<br/>🚀AVAX-WALBT 1x<br/>🚀PNG-WALBT 5x<br/><br/>
+        ⏬ <a href='https://app.pangolin.exchange/#/png/1' target='_blank'><u>app.pangolin.exchange</u></a>`,
+      }
     },
     {
       title: "Listing Celebration to @coin98_wallet: Win $2500 in $DYP",
@@ -839,6 +1041,15 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
         "https://pbs.twimg.com/media/E9D1hZDXsAAqXGu?format=jpg&name=medium",
       date: "Aug 18, 2021",
       link: "https://twitter.com/dypfinance/status/1427912209762603008?s=20",
+      content: {
+        title: 'Listing Celebration to @coin98_wallet: Win $2500 in $DYP',
+        imageSrc: 'https://pbs.twimg.com/media/E9D1hZDXsAAqXGu?format=jpg&name=medium',
+        content: `<h3>Listing Celebration to @coin98_wallet: Win $2500 in $DYP</h3><br/><br>
+       1️⃣ Follow <a href='https://twitter.com/dypfinance' target='_blank'><u>@dypfinance</u></a> and <a href='https://twitter.com/coin98_wallet' target='_blank'><u>@coin98_wallet</u></a><br/><br/>
+       2️⃣ Join <a href='https://t.me/dypfinance' target='_blank'><u>t.me/dypfinance</u></a> & <a href='https://t.me/coin98wallet' target='_blank'>t.me/coin98wallet<u><br/>
+       3️⃣ Retweet, like & tag 3 friends<br/>4️⃣ Comment QR Screenshot Coin98 $DYP address<br/><br/>
+       🎁 100 lucky winners will receive $25 each!`,
+      }
     },
     {
       title: "Aircoins is excited to announce newest partner with DYP",
@@ -846,6 +1057,13 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
         "https://pbs.twimg.com/media/E8DDO9nWEAcEyxA?format=jpg&name=medium",
       date: "Aug 05, 2021",
       link: "https://twitter.com/AIRCOINS_App/status/1423352145697546241",
+      content: {
+        title: 'Aircoins is excited to announce newest partner with DYP',
+        imageSrc: 'https://pbs.twimg.com/media/E8DDO9nWEAcEyxA?format=jpg&name=medium',
+        content: `Aircoins is excited to announce our newest partner @dypfinance!<br/><br>
+        To Celebrate: $1000 in DYP up for grabs!<br/> $750 in $DYP for the best DYP AR photos<br/>$250 in $DYP drawing for following both <br/>
+        @AIRCOINS_App and @dypfinance and retweeting this.<br/>Contest ends August 12th<br/>`
+      }
     },
     {
       title: "Pangolin hosting a giveaway with Defi Yield Protocol",
@@ -853,6 +1071,14 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
         "https://pbs.twimg.com/media/E74VgYqUcAEnsON?format=jpg&name=large",
       date: "Jul 12, 2021",
       link: "https://twitter.com/pangolindex/status/1422604691251163142",
+      content: {
+        title: 'Pangolin hosting a giveaway with Defi Yield Protocol',
+        imageSrc: 'https://pbs.twimg.com/media/E74VgYqUcAEnsON?format=jpg&name=large',
+        content: `<h3>💸✨$1,000 Giveaway✨💸</h3><br/><br>
+        💰We are hosting a giveaway with @dypfinance - 5 lucky winners will get $200!💰<br/> To Enter:<br/>
+        ⚡️Follow <a href='https://twitter.com/pangolindex' target='_blank'><u>@pangolindex</u></a> and <a href='https://twitter.com/dypfinance' target='_blank'><u>@dypfinance</u></a><br/>
+        ✈️Join the Pangolin and DYP #telegram<br/>💻Join the Pangolin and DYP #discord<br/>👪Tag 3 friends + ♻️retweet`
+      }
     },
     {
       title: "DeFi Yield Protocol NFT Creative Competition is LIVE!",
@@ -860,6 +1086,35 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
         "https://miro.medium.com/max/1400/1*h95JYnco1tuL3IGB0TAjsg.jpeg",
       date: "Jul 12, 2021",
       link: "https://dypfinance.medium.com/defi-yield-protocol-nft-creative-competition-is-live-9d28528fef08",
+      content: {
+        title: 'DeFi Yield Protocol NFT Creative Competition is LIVE!',
+        imageSrc: 'https://miro.medium.com/max/1400/1*h95JYnco1tuL3IGB0TAjsg.jpeg',
+        content: `To celebrate the launch of NFT Marketplace, the creative competition will officially begin! We invite global NFT creators to use their imagination, compete in terms of creativity, and participate in the creative contest to share DYP tokens worth US $50,000.<br/><br/>
+        The contest will begin today, and it will end when at least 1000 NFTs have been created.<br/><br/>
+        <b>Rules:</b>
+        ✅ Follow <a href='https://twitter.com/dypfinance' target='_blank'><u>@dypfinance</u></a> on Twitter<br/>
+        ✅ Retweet <a href='https://twitter.com/dypfinance/status/1414541027248050178?s=20' target='_blank'><u>this post</u></a> with #DeFiYieldProtocol #NFT hashtag<br/>
+        ✅ Create your unique NFT on DeFi Yield Protocol <a href='https://nft.dyp.finance/' target='_blank'><u>NFT Marketplace</u></a><br/>
+        ✅ Tweet your NFT artwork with the hashtag #DYP #NFT<br/><br/>
+        <b>Prizes:</b><br/><br/><br/>
+        • 1 Winner of $10,000<br/>
+        • 2 Winners of $5000 each<br/>
+        • 5 Winners of $2000 each<br/>
+        • 50 Winners of $200 each<br/>
+        • 100 Winners of $100 each<br/><br/><br/>
+        <b><i>Note:</i></b><br/><br/>
+        1. The winners will be chosen based on the NFT quality, social media activity earned by their tweet containing there NFT, and a community vote.<br/>
+        2. Prizes will be distributed within 10 days of the campaign ending.<br/>
+        3. The competition activity on the platform will undergo rigorous inspection during the activity. For any malicious acts conducted during the period, including manipulations, bulk registration of accounts, etc., the platform will cancel the qualification of the participants.<br/>
+        4. The current campaign is available only for the NFT dApp on Ethereum Network, you will need DYP on Ethereum Network to create NTFs.<br/>
+        <b>About DeFi Yield Protocol</b><br/><br/>
+        The DeFi Yield Protocol (DYP) is a unique platform offering solutions for yield farming, staking, NFTs, and enabling users to leverage the advanced trading tools of the DYP. What makes the DYP a unique yield farming aggregator?<br/><br/>
+        The DYP has made history in the DeFi space by becoming the first and only protocol that employs an anti-manipulation feature, aiming to limit the market impact on users.<br/><br/>
+        Anti-manipulation targets to keep stability, fair access to liquidity, and supply a secure and simplified DeFi platform for users of all sizes.<br/><br/>
+        The central feature of the DYP is the decentralized tool dashboard. It provides advanced features, including Decentralized Score, Unique Community Trust Vote System, DYP Locker, Yield Farm Data, and Launch Pad, allowing users to make informed decisions.<br/><br/>
+        <b><a href='https://dyp.finance/' target='_blank'><u>Website</u></a> | <a href='https://t.me/dypannouncements' target='_blank'><u>Announcements</u></a> | <a href='https://discord.com/invite/kYDT6pc' target='_blank'><u>Discord</u> </a> | <a href='https://twitter.com/dypfinance' target='_blank'> <u>Twitter</u> </a>|<a href='https://t.me/dypfinance' target='_blank'> <u>Telegram</u> </a>|<a href='https://github.com/dypfinance' target='_blank'> <u>GitHub</u> </a>|<a href='https://www.youtube.com/channel/UC6Wrn8A-pq79srb9OC-ufXw' target='_blank'> <u>YouTube</u> </a></b><br/><br/>
+        `
+      }
     },
   ];
 
@@ -885,11 +1140,11 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
         items: 1,
       },
       960: {
-        items: 2,
-        slideBy: 2,
+        items: 1,
+        slideBy: 1,
       },
       1200: {
-        items: 2,
+        items: 1,
         slideBy: 2,
       },
       1920: {
@@ -899,7 +1154,7 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
     },
   };
 
-  const carousel = React.createRef();
+  const carousel = useRef();
   const carousel2 = React.createRef();
   const newsPerRow = 4;
   const [activeClass, setActiveClass] = useState("latestnews");
@@ -913,19 +1168,20 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
   };
 
   const handleNewsClick = (id) => {
-    carousel.current.to(id, 1000);
+    carousel.current.to(id, 500);
   };
 
-  console.log(activeNews);
+  const handleSingleNewsUpdate = (id) => {
+    setActiveNews(newsArray[id]);
+  };
 
   return (
     <>
       <div className="news-wrapper">
         <h1 className="news-title">Popular News</h1>
-        <div className="row m-0">
+        <div className="row m-0 main-news-content-wrapper">
           <div
-            className="brand-wrapper banner-wrapper"
-            style={{ maxWidth: "60%", display: "flex" }}
+            className="brand-wrapper banner-wrapper news-left-wrapper"
           >
             <OwlCarousel
               ref={carousel}
@@ -935,7 +1191,7 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
               {newsArray.length > 0 &&
                 newsArray.map((item, key) => {
                   return (
-                    <div className="banner-item" key={key}>
+                    <div className="" key={key}>
                       <MainNews
                         image={item.imageSrc}
                         title={item.title}
@@ -948,6 +1204,7 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
                           setShowModal(true);
                           setActiveNews(newsArray[key]);
                         }}
+                        
                       />
                     </div>
                   );
@@ -996,10 +1253,9 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
                       theme={theme}
                       onNewsClick={(e) => {
                         handleNewsClick(key);
-                        setActiveNews(newsArray[key]);
-                        setShowModal(true);
                         e.stopPropagation();
                       }}
+                      onClick={()=>handleSingleNewsUpdate(key)}
                     />
                   </div>
                 );
@@ -1047,7 +1303,7 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
         >
           Other News
         </h1>
-        <div className="row m-0" style={{ rowGap: 10 }}>
+        <div className="row m-0 othernews-row-wrapper" style={{ rowGap: 10 }}>
           {otherNews.length > 0 &&
             otherNews?.slice(0, next)?.map((item, key) => {
               return (
@@ -1062,6 +1318,10 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
                     link={item.link}
                     date={item.date}
                     theme={theme}
+                    onOtherNewsClick={() => {
+                      setActiveNews(otherNews[key]);
+                      setShowModal(true);
+                    }}
                   />
                 </div>
               );
