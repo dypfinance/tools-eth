@@ -1144,7 +1144,7 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
         slideBy: 1,
       },
       1200: {
-        items: 1,
+        items: 2,
         slideBy: 2,
       },
       1920: {
