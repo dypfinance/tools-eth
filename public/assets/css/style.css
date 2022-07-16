@@ -1650,7 +1650,10 @@ body.theme-dark img.graph-two {
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-
+  cursor: pointer;
+}
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .right-col {
