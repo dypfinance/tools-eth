@@ -1486,6 +1486,7 @@ body.theme-dark img.graph-two {
 .left-col {
   display: flex;
   flex-direction: column;
+  height: fit-content;
 }
 
 .tag-wrapper {
