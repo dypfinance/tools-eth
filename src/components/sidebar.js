@@ -1,10 +1,9 @@
 import { NavLink } from "react-router-dom";
 import Ethereum from "../assets/ethereum.svg";
 import Avax from "../assets/avalanche.svg";
-import Logo from '../assets/logo.svg'
-import LogoWhite from '../assets/logo-white.svg'
+import Logo from "../assets/logo.svg";
+import LogoWhite from "../assets/logo-white.svg";
 import React, { useState } from "react";
-
 
 const activateLasers = () => {
   window.$.alert("Coming Soon!");
@@ -12,6 +11,7 @@ const activateLasers = () => {
 
 const Sidebar = (props) => {
   const [activeBtn, setActiveBtn] = useState("eth");
+  const [activeLink, setActiveLink] = useState("");
 
   return (
     <div
@@ -23,11 +23,7 @@ const Sidebar = (props) => {
       </div>
       <div className="logo">
         <a href="/">
-          <img
-            className="logo-white"
-            src={LogoWhite}
-            alt="Image"
-          />
+          <img className="logo-white" src={LogoWhite} alt="Image" />
           <img className="logo-black" src={Logo} alt="Image" />
         </a>
       </div>
@@ -37,13 +33,15 @@ const Sidebar = (props) => {
           <a
             href="javascript:void(0)"
             className="hoverNetwork"
-            style={{ background: activeBtn === "eth" ? "#1D91D0" : "#EFF0F6"}}
+            style={{ background: activeBtn === "eth" ? "#1D91D0" : "#EFF0F6" }}
             onClick={() => {
               setActiveBtn("eth");
             }}
           >
             <img src={Ethereum} alt="Image not found" />
-            <span style={{ color: activeBtn === "eth" ? "#fff" : ""  }}>Ethereum</span>
+            <span style={{ color: activeBtn === "eth" ? "#fff" : "" }}>
+              Ethereum
+            </span>
           </a>
           <a
             href="https://avax-tools.dyp.finance/"
@@ -57,44 +55,95 @@ const Sidebar = (props) => {
             }}
           >
             <img src={Avax} alt="Image not found" />
-            <span style={{ color: activeBtn === "avax" ? "#fff" : ""  }}>Avalanche</span>
+            <span style={{ color: activeBtn === "avax" ? "#fff" : "" }}>
+              Avalanche
+            </span>
           </a>
         </h6>
         <ul>
           <li>
-            <NavLink exact to="/pool-explorer">
-              <img src="/assets/img/search.svg" alt="Image" />
-              <span className="sidebar-link">Pool Explorer</span>
+            <NavLink
+              exact
+              to="/pool-explorer"
+              onClick={() => {
+                setActiveLink("explorer");
+              }}
+              className={activeLink === "explorer" ? "activelink" : ""}
+            >
+              <img
+                src={
+                  activeLink === "explorer"
+                    ? "/assets/img/search.svg"
+                    : "/assets/img/search-passive.svg"
+                }
+                alt="Image"
+              />
+              <span className="sidebar-link">Explorer</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/pair-explorer">
-              <img src="/assets/img/compass.svg" alt="Image" />
+            <NavLink
+              to="/pair-explorer"
+              onClick={() => {
+                setActiveLink("pair");
+              }}
+              className={activeLink === "pair" ? "activelink" : ""}
+            >
+              <img
+                src={
+                  activeLink === "pair"
+                    ? "/assets/img/compass.svg"
+                    : "/assets/img/compass-passive.svg"
+                }
+                alt="Image"
+              />
               <span className="sidebar-link">Pair Explorer</span>
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/big-swap-explorer">
-              <i className="fas fa-exchange-alt" alt="Image" />
+          {/* <li>
+            <NavLink to="/big-swap-explorer"  onClick={() => {
+                setActiveLink("swap");
+              }}>
+               <img
+                src={
+                  activeLink === "pair"
+                    ? "/assets/img/compass.svg"
+                    : "/assets/img/compass-passive.svg"
+                }
+                alt="Image"
+              />
               <span className="sidebar-link">Big Swap Explorer</span>
             </NavLink>
-          </li>
+          </li> */}
           <li>
-            <NavLink to="/locker">
-              <i className="fas fa-lock" alt="Image" />
+            <NavLink
+              to="/locker"
+              onClick={() => {
+                setActiveLink("lock");
+              }}
+              className={activeLink === "lock" ? "activelink" : ""}
+            >
+              <img
+                src={
+                  activeLink === "lock"
+                    ? "/assets/img/locker-active.svg"
+                    : "/assets/img/locker-passive.svg"
+                }
+                alt="Image"
+              />
               <span className="sidebar-link">DYP Locker</span>
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to="/top-tokens">
               <i className="fab fa-ethereum" alt="Image" />
               <span className="sidebar-link">Top Tokens</span>
             </NavLink>
-          </li>
+          </li> */}
         </ul>
       </div>
-      <div className="menu-cat-two">
-        <h6>Others</h6>
+      <div className="menu-cat-two m-0">
+        {/* <h6>Others</h6> */}
         <ul>
           {String(props.appState.coinbase).toLowerCase() ==
             window.config.metamask_admin_account.toLowerCase() && (
@@ -105,33 +154,57 @@ const Sidebar = (props) => {
               </NavLink>
             </li>
           )}
-          <li>
+          {/* <li>
             <NavLink to="/farms">
               <i className="fas fa-seedling" />
               <span className="sidebar-link">Yields</span>
             </NavLink>
-          </li>
-          <li>
+          </li> */}
+          <li
+            onClick={() => {
+              setActiveLink("rocket");
+            }}
+            className={activeLink === "rocket" ? "activelink" : ""}
+          >
             <a
               target="_blank"
               rel="noopener noreferrer"
               href="https://dyp.finance/launchpad"
             >
-              <i className="fas fa-rocket" />
+              <img
+                src={
+                  activeLink === "rocket"
+                    ? "/assets/img/rocket-active.svg"
+                    : "/assets/img/rocket-passive.svg"
+                }
+                alt="Image"
+              />
               <span className="sidebar-link">LaunchPad</span>
             </a>
           </li>
-          <li>
+          <li
+            onClick={() => {
+              setActiveLink("info");
+            }}
+          >
             <a
               target="_blank"
               rel="noopener noreferrer"
               href={window.config.submission_form_link}
+              className={activeLink === "info" ? "activelink" : ""}
             >
-              <i className="far fa-file-alt" />
+              <img
+                src={
+                  activeLink === "info"
+                    ? "/assets/img/info-active.svg"
+                    : "/assets/img/info-passive.svg"
+                }
+                alt="Image"
+              />
               <span className="sidebar-link">Submit Info</span>
             </a>
           </li>
-          <li>
+          {/* <li>
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -140,17 +213,32 @@ const Sidebar = (props) => {
               <img src="/assets/img/cart.svg" alt="Image" />
               <span className="sidebar-link">Buy DYP</span>
             </a>
-          </li>
-          <li onClick={props.toggleTheme} className="change-clr">
+          </li> */}
+          {/* <li onClick={props.toggleTheme} className="change-clr">
             <a href="javascript:void(0)">
+              <span className="sidebar-link">Change theme</span>
               <i
                 className={`fas fa-${
                   props.theme == "theme-white" ? "moon" : "sun"
                 }`}
               />
-              <span className="sidebar-link">Change theme</span>
             </a>
-          </li>
+          </li> */}
+          <div className="d-flex align-items-center" style={{gap: 15}}>
+          <span className="sidebar-link">Change theme</span>
+          <div
+            className={`${
+              props.theme == "theme-dark" ? "active-toggle" : ""
+            } toggle-button-wrapper`}
+            onClick={props.toggleTheme}
+          >
+            <a href="javascript:void(0)">
+              <div>
+                <div className="toggle-circle"></div>
+              </div>
+            </a>
+          </div>
+          </div>
         </ul>
       </div>
     </div>
