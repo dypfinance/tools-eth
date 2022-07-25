@@ -5,6 +5,7 @@ import PressRealease from "./PressRelease";
 import OtherNews from "./OtherNews";
 import OwlCarousel from "react-owl-carousel";
 import NewsModal from "./NewsModal";
+import axios from "axios";
 
 const News = ({ theme }) => {
   const newsArray = [
@@ -3231,6 +3232,7 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
     },
   ];
 
+
   const owlCarouselOptionsPress = {
     loop: true,
     margin: 0,
@@ -3286,6 +3288,19 @@ Now that DeFi Yield Protocol offers its own NFT Marketplace, is a monumental ach
   const handleSingleNewsUpdate = (id) => {
     setActiveNews(newsArray[id]);
   };
+
+
+  const fetchVotes = async (itemId)=>{
+    return await axios.get(`https://testd.dyp.finance/v1/votes/${itemId}`).then((data)=>{console.log(data.data)})
+  }
+
+  const handleVoting = async ()=>{
+    
+  }
+
+  useEffect(()=>{
+    fetchVotes()
+  })
 
   return (
     <>
