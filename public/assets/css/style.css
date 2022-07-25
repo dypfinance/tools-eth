@@ -539,7 +539,7 @@ a:hover {
 }
 
 .header-right {
-  width: 45%;
+  width: 35%;
   padding-right: 25px;
   overflow: hidden;
 }
@@ -674,6 +674,7 @@ a:hover {
   font-weight: 500 !important;
 font-size: 16px !important;
 line-height: 19px !important;
+color: #A5A6A9 !important;
 }
 
 .sidebar-link2 {
@@ -2058,7 +2059,8 @@ body {
 .graph-data {
   margin: 1.2rem 0;
 }
-.sidebar a.active span {
+.sidebar a.active span,
+.sidebar .menu-cat-two.m-0 ul  li.activelink a span {
   color: var(--red) !important;
 }
 

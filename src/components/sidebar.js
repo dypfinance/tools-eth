@@ -11,7 +11,7 @@ const activateLasers = () => {
 
 const Sidebar = (props) => {
   const [activeBtn, setActiveBtn] = useState("eth");
-  const [activeLink, setActiveLink] = useState("");
+  const [activeLink, setActiveLink] = useState("news");
 
   return (
     <div
@@ -22,7 +22,7 @@ const Sidebar = (props) => {
         <i className="fas fa-arrow-left"></i>
       </div>
       <div className="logo">
-        <a href="/">
+        <a href="/news">
           <img className="logo-white" src={LogoWhite} alt="Image" />
           <img className="logo-black" src={Logo} alt="Image" />
         </a>
@@ -134,6 +134,25 @@ const Sidebar = (props) => {
               <span className="sidebar-link">DYP Locker</span>
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/news"
+              onClick={() => {
+                setActiveLink("news");
+              }}
+              className={activeLink === "news" ? "activelink" : ""}
+            >
+              <img
+                src={
+                  activeLink === "news"
+                    ? "/assets/img/news-active.svg"
+                    : "/assets/img/news-passive.svg"
+                }
+                alt="Image"
+              />
+              <span className="sidebar-link">News</span>
+            </NavLink>
+          </li>
           {/* <li>
             <NavLink to="/top-tokens">
               <i className="fab fa-ethereum" alt="Image" />
@@ -204,16 +223,26 @@ const Sidebar = (props) => {
               <span className="sidebar-link">Submit Info</span>
             </a>
           </li>
-          {/* <li>
+          <li  onClick={() => {
+              setActiveLink("buydyp");
+            }}>
             <a
               target="_blank"
               rel="noopener noreferrer"
               href="https://app.uniswap.org/#/swap?outputCurrency=0x961c8c0b1aad0c0b10a51fef6a867e3091bcef17"
+              className={activeLink === "buydyp" ? "activelink" : ""}
             >
-              <img src="/assets/img/cart.svg" alt="Image" />
+              <img
+                src={
+                  activeLink === "buydyp"
+                    ? "/assets/img/buydyp-active.svg"
+                    : "/assets/img/buydyp-passive.svg"
+                }
+                alt="Image"
+              />
               <span className="sidebar-link">Buy DYP</span>
             </a>
-          </li> */}
+          </li>
           {/* <li onClick={props.toggleTheme} className="change-clr">
             <a href="javascript:void(0)">
               <span className="sidebar-link">Change theme</span>
@@ -225,7 +254,7 @@ const Sidebar = (props) => {
             </a>
           </li> */}
           <div className="d-flex align-items-center" style={{gap: 15}}>
-          <span className="sidebar-link">Change theme</span>
+          {/* <span className="sidebar-link">Change theme</span> */}
           <div
             className={`${
               props.theme == "theme-dark" ? "active-toggle" : ""

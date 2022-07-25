@@ -15,6 +15,7 @@ import Sidebar from "./components/sidebar";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import { Route } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 // import getSyncStats from './functions/get-indexing-status'
 import getFormattedNumber from "./functions/get-formatted-number";
@@ -32,10 +33,8 @@ class App extends React.Component {
       isOpenInMobile: false,
       isConnected: false,
       coinbase: null,
-
       subscribedPlatformTokenAmount: "...",
       isPremium: false,
-
       hotPairs: [],
       show: false,
     };
@@ -69,6 +68,7 @@ class App extends React.Component {
     let coinbase = await window.getCoinbase();
     let subscribedPlatformTokenAmount =
       await window.subscriptionPlatformTokenAmount(coinbase);
+      console.log(subscribedPlatformTokenAmount)
     let isPremium = Number(subscribedPlatformTokenAmount) > 0;
     this.setState({ subscribedPlatformTokenAmount, isPremium });
   };
@@ -193,10 +193,10 @@ class App extends React.Component {
             />
             <Route
               exact
-              path="/"
+              path="/news"
               render={() => <News theme={this.state.theme} />}
             />
-
+ <Redirect  to="/news" />
             <Route
               exact
               path="/big-swap-explorer"
