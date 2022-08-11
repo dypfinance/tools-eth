@@ -1,8 +1,8 @@
 import React from 'react'
 import moment from 'moment'
-import DataTable, { createTheme } from 'react-data-table-component'
+import DataTable, {createTheme} from 'react-data-table-component'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { NavLink, Redirect } from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 
 // import Chart from 'kaktana-react-lightweight-charts'
 import {TVChartContainer} from '../tv-chart-container/index'
@@ -11,16 +11,23 @@ import getProcessedSwaps from '../../functions/get-processed-swaps'
 import getFormattedNumber from '../../functions/get-formatted-number'
 // import getPairCandles from '../../functions/get-pair-candles'
 import getSearchResults from '../../functions/get-search-results';
-import { get24hEarlierBlock } from '../../functions/get-block-from-timestamp';
+import {get24hEarlierBlock} from '../../functions/get-block-from-timestamp';
 import fetchGql from '../../functions/fetch-gql';
-import { getPairCandles } from '../../functions/datafeed'
+import {getPairCandles} from '../../functions/datafeed'
 
-import { Modal, Button } from 'react-bootstrap'
+import {Button, Modal} from 'react-bootstrap'
 
 import axios from 'axios'
 
 async function getTokenInformation(address) {
     let res = await axios.get(`https://api.coingecko.com/api/v3/coins/ethereum/contract/${address}`)
+    return res.data
+}
+
+async function getSearchResultsLocalAPI(query)
+{
+    let res = await axios.get(`https://api-explorer.dyp.finance/v1/eth/search/pairs/${query}`)
+
     return res.data
 }
 
@@ -353,10 +360,10 @@ export default class PairExplorer extends React.Component {
             return;
         }
         this.setState({isSearching: true})
-        getSearchResults(this.state.query)
+        getSearchResultsLocalAPI(this.state.query)
             .then(searchResults => {
                 if (!this.state.query) searchResults = []
-                this.setState({searchResults})
+                this.setState({searchResults: searchResults})
             })
             .catch(console.log)
             .finally(() => {
@@ -832,13 +839,13 @@ export default class PairExplorer extends React.Component {
                                 <input value={this.state.query} onChange={e => this.handleQuery(e.target.value)} type="text" id="search-bar" autoComplete="off" placeholder="Search Pairs" />
                                 <ul className="output" style={{display: this.state.searchResults.length == 0 ? 'none' : 'block', zIndex: 9, maxHeight: '300px', overflowY: 'auto'}}>
                                     {
-                                        this.state.searchResults.map((p) => <NavLink to={`/pair-explorer/${p.id}`}><li key={p.id} class="prediction-item">
+                                        this.state.searchResults.map((p) => <NavLink to={`/pair-explorer/${p.pair.address.toLowerCase()}`}><li key={p.id} class="prediction-item">
                                         <div class="suggest-item">
                                             <h2 style={{fontSize: '1.2rem', fontWeight: 500}}>
-                                                <span class="wh_txt">{p.token1.symbol}</span>/{p.token0.symbol} <span class="bar">-</span> ({p.token0.name})
+                                                <span class="wh_txt">{p.pair.token_1.symbol}</span>/{p.pair.token_0.symbol} <span class="bar">-</span> ({p.pair.token_0.name})
                                             </h2>            
-                                            <p style={{fontSize: '.85rem', fontWeight: 400}}>Token: ...{p.token0.id.slice(34)} - Pair: ...{p.id.slice(34)}</p>             
-                                            <p style={{fontSize: '.85rem', fontWeight: 400}}>Total Liquidity: ${getFormattedNumber(p.reserveUSD, 2)}</p>   
+                                            <p style={{fontSize: '.85rem', fontWeight: 400}}>Token: ...{p.pair.token_0.address.toLowerCase().slice(34)} - Pair: ...{p.pair.address.toLowerCase().slice(34)}</p>
+                                            {/*<p style={{fontSize: '.85rem', fontWeight: 400}}>Total Liquidity: ${getFormattedNumber(p.reserveUSD, 2)}</p>*/}
                                         </div>
                                     </li>
                                     </NavLink>
